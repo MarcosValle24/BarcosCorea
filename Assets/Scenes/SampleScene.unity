@@ -1217,6 +1217,48 @@ MonoBehaviour:
       m_Action: Controller
       m_Flags: 8
     m_Flags: 0
+  touchScreen:
+    m_Name: Touch Screen
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: 9229a5e3-5066-41f7-9a14-458228ffcc65
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: d82d74ed-03b9-4de2-bdbc-cf0374ec6e88
+      m_Path: <Touchscreen>/primaryTouch/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Screen
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 10041665-e16b-4f70-8921-1bbc9f6b5517
+      m_Path: <Mouse>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Screen
+      m_Flags: 0
+    m_Flags: 0
+  click:
+    m_Name: Click
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: a5de08a2-0d7d-4beb-91e0-2a30b7e9dff6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: e0946a02-9f98-43bb-b0e3-537cf5dbe1c2
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Click
+      m_Flags: 0
+    m_Flags: 0
 --- !u!54 &340237665
 Rigidbody:
   m_ObjectHideFlags: 0
