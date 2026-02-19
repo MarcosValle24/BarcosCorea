@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
@@ -7,7 +8,6 @@ public class UIHandler : MonoBehaviour
 
     [SerializeField] private TMP_Text timerText;
 
-    
     void Awake()
     {
         if (instance != null && instance != this)
@@ -26,5 +26,9 @@ public class UIHandler : MonoBehaviour
         {
             timerText.text = text;
         }
+    }
+
+    private void Update()
+    {
     }
 }

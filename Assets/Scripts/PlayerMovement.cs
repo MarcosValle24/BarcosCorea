@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -20,7 +21,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 centerTouch;
     private bool isPressed;
 
+
     private float angle;
+
+    public float GetAngle { get { return angle; } }
+    public bool GetisPressed { get { return isPressed; } }
+    public float GetRotationSpeed {  get { return rotationSpeed; } }
    public bool arrived {get;  set;}
 
     private void OnEnable()
