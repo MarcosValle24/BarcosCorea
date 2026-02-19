@@ -57,19 +57,53 @@ public class PlayerMovement : MonoBehaviour
         
             transform.Rotate(Vector3.up * rotationMove*Time.deltaTime);
         }
+        MouseInput();
+        TouchInput();
 
-        if (Mouse.current == null) return;
+    }
+    void TouchInput()
+    {
+        if (Touchscreen.current == null) return;
 
-        if (click.WasPressedThisFrame() && isPressed == false)
+        var touch = Touchscreen.current.primaryTouch;
+
+        if (touch.press.wasPressedThisFrame && isPressed == false)
         {
-            centerTouch = Mouse.current.position.ReadValue();
+            centerTouch = touchScreen.ReadValue<Vector2>();
             firstTouch = Vector2.zero;
             isPressed = true;
         }
 
         if (click.IsPressed() && isPressed == true)
         {
-            currentTouch = Mouse.current.position.ReadValue() - centerTouch;
+            currentTouch = touchScreen.ReadValue<Vector2>() - centerTouch;
+
+            angle = Vector2.SignedAngle(firstTouch, currentTouch);
+
+            transform.Rotate(Vector3.up * angle * rotationSpeed * Time.deltaTime);
+
+            firstTouch = currentTouch;
+        }
+
+        if (click.WasReleasedThisFrame())
+        {
+            isPressed = false;
+        }
+    }
+    void MouseInput()
+    {
+        if (Mouse.current == null) return;
+
+        if (click.WasPressedThisFrame() && isPressed == false)
+        {
+            centerTouch = touchScreen.ReadValue<Vector2>();
+            firstTouch = Vector2.zero;
+            isPressed = true;
+        }
+
+        if (click.IsPressed() && isPressed == true)
+        {
+            currentTouch = touchScreen.ReadValue<Vector2>() - centerTouch;
 
             angle = Vector2.SignedAngle(firstTouch, currentTouch);
 
@@ -82,8 +116,8 @@ public class PlayerMovement : MonoBehaviour
         {
             isPressed = false;
         }
-    }
 
+    }
     void FixedUpdate()
     {
         rb.linearVelocity = transform.right * speed;
