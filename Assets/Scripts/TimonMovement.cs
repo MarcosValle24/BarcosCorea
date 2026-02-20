@@ -1,3 +1,4 @@
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,8 +22,7 @@ public class TimonMovement : MonoBehaviour
 
         if (playerAngleMovement.GetisPressed == true)
         {
-            transform.Rotate(0,0,playerAngleMovement.GetAngle * Time.deltaTime * playerAngleMovement.GetRotationSpeed);
-            Debug.Log(transform.rotation.z);
+            transform.Rotate(Vector3.forward * playerAngleMovement.GetAngle);
         }
 
     }

@@ -1,5 +1,5 @@
 using System;
-using UnityEditor.U2D.Sprites;
+//using UnityEditor.U2D.Sprites;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -63,9 +63,12 @@ public class PlayerMovement : MonoBehaviour
         
             transform.Rotate(Vector3.up * rotationMove*Time.deltaTime);
         }
-        MouseInput();
-        TouchInput();
-
+        if (UsingTouch()) TouchInput();
+        else MouseInput();
+    }
+    private bool UsingTouch()
+    {
+        return Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed;
     }
     void TouchInput()
     {
@@ -73,57 +76,59 @@ public class PlayerMovement : MonoBehaviour
 
         var touch = Touchscreen.current.primaryTouch;
 
-        if (touch.press.wasPressedThisFrame && isPressed == false)
-        {
-            centerTouch = touchScreen.ReadValue<Vector2>();
-            firstTouch = Vector2.zero;
-            isPressed = true;
-        }
-
-        if (click.IsPressed() && isPressed == true)
-        {
-            currentTouch = touchScreen.ReadValue<Vector2>() - centerTouch;
-
-            angle = Vector2.SignedAngle(firstTouch, currentTouch);
-
-            transform.Rotate(Vector3.up * angle * rotationSpeed * Time.deltaTime);
-
-            firstTouch = currentTouch;
-        }
-
-        if (click.WasReleasedThisFrame())
+        if (!touch.press.isPressed)
         {
             isPressed = false;
+            return;
         }
+
+        Vector2 pos = touch.position.ReadValue();
+
+        if (!isPressed)
+        {
+            centerTouch = pos;
+            firstTouch = pos - centerTouch;
+            isPressed = true;
+            return;
+        }
+
+        Vector2 currentVector = pos - centerTouch;
+
+        angle = Vector2.SignedAngle(firstTouch, currentVector);
+
+        transform.Rotate(Vector3.up * angle * rotationSpeed * Time.deltaTime);
+
+        firstTouch = currentVector;
     }
     void MouseInput()
     {
         if (Mouse.current == null) return;
 
-        if (click.WasPressedThisFrame() && isPressed == false)
-        {
-            centerTouch = touchScreen.ReadValue<Vector2>();
-            firstTouch = Vector2.zero;
-            isPressed = true;
-        }
-
-        if (click.IsPressed() && isPressed == true)
-        {
-            currentTouch = touchScreen.ReadValue<Vector2>() - centerTouch;
-
-            angle = Vector2.SignedAngle(firstTouch, currentTouch);
-
-            transform.Rotate(Vector3.up * angle * rotationSpeed *  Time.deltaTime);
-
-            firstTouch = currentTouch; 
-        }
-
-        if (click.WasReleasedThisFrame())
+        if (!click.IsPressed())
         {
             isPressed = false;
+            return;
         }
 
+        Vector2 pos = Mouse.current.position.ReadValue();
+
+        if (!isPressed)
+        {
+            centerTouch = pos;
+            firstTouch = pos - centerTouch; 
+            isPressed = true;
+            return;
+        }
+
+        Vector2 currentVector = pos - centerTouch;
+
+        angle = Vector2.SignedAngle(firstTouch, currentVector);
+
+        transform.Rotate(Vector3.up * angle * rotationSpeed * Time.deltaTime);
+
+        firstTouch = currentVector;
     }
+
     void FixedUpdate()
     {
         rb.linearVelocity = transform.right * speed;
