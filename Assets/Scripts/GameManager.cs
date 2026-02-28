@@ -1,14 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+public enum Mode
+{
+    FreeTime,
+    TimeMode
+}
 public class GameManager : MonoBehaviour
 {
     public static  GameManager instance;
     
     [SerializeField]private List<GameObject> docks;
     [SerializeField] private float maxTime;
+    Mode gameMode;
+    public UnityEvent startGame;
 
-    
     private bool isPlaying = false;
     private float timer = 0;
     private GameObject currentDock;
@@ -27,7 +34,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        BeginPlay();
+        //BeginPlay();
     }
 
     public void BeginPlay()
@@ -36,6 +43,7 @@ public class GameManager : MonoBehaviour
         currentDock.SetActive(true);
         isPlaying = true;
         timer = maxTime;
+        startGame.Invoke();
     }
 
     public void GameOver()
@@ -52,16 +60,27 @@ public class GameManager : MonoBehaviour
     {
         if(isPlaying)
         { 
-            timer -= Time.deltaTime;
-            int minutes = Mathf.FloorToInt(timer / 60f);
-            int seconds = Mathf.FloorToInt(timer % 60f);
             
-            UIHandler.instance.UpdateTimer(minutes.ToString("00")+ ":"+ seconds.ToString("00"));
-            
-            if(timer <=0)
-            {
-                GameOver();
-            }
+        }
+    }
+    public void FreeGameMode()
+    {
+        gameMode = Mode.FreeTime;
+        BeginPlay();
+    }
+    public void TimeGameMode()
+    {
+        gameMode = Mode.TimeMode;
+        BeginPlay();
+        timer -= Time.deltaTime;
+        int minutes = Mathf.FloorToInt(timer / 60f);
+        int seconds = Mathf.FloorToInt(timer % 60f);
+
+        UIHandler.instance.UpdateTimer(minutes.ToString("00") + ":" + seconds.ToString("00"));
+
+        if (timer <= 0)
+        {
+            GameOver();
         }
     }
 }

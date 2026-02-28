@@ -1,5 +1,4 @@
 using System;
-//using UnityEditor.U2D.Sprites;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -10,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
     [SerializeField]private float speed;
+    [SerializeField] private float initialSpeed;
+    [SerializeField] private Transform initialPos;
     [SerializeField] private float rotationSpeed;
     
     [SerializeField]private InputAction controller;
@@ -29,11 +30,19 @@ public class PlayerMovement : MonoBehaviour
     public float GetRotationSpeed {  get { return rotationSpeed; } }
    public bool arrived {get;  set;}
 
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        arrived = false;
+        initialSpeed = speed;
+        initialPos = gameObject.transform;
+    }
     private void OnEnable()
     {
         controller.Enable();
         touchScreen.Enable();
         click.Enable();
+        GameManager.instance.startGame.AddListener(OnGameStart);
     }
 
     private void OnDisable()
@@ -41,15 +50,16 @@ public class PlayerMovement : MonoBehaviour
         controller.Disable();
         touchScreen.Disable();
         click.Disable();
+        GameManager.instance.startGame.RemoveAllListeners();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnGameStart()
     {
-        rb = GetComponent<Rigidbody>();
-        arrived = false;
+        this.gameObject.transform.position = initialPos.position;
+        this.gameObject.transform.rotation = initialPos.rotation;
+        speed = initialSpeed;
     }
-
     // Update is called once per frame
     void Update()
     {
