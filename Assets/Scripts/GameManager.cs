@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         { 
             dock.SetActive(false);
         }
+        UIHandler.instance.ShowPanel(GameResult.Lose);
     }
     public void Pause(bool isPaused) 
     {
