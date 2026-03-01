@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     Mode gameMode;
     public UnityEvent startGame;
 
-    private bool isPlaying = false;
+    public bool isPlaying = false;
     private float timer = 0;
     private GameObject currentDock;
 
@@ -62,8 +62,16 @@ public class GameManager : MonoBehaviour
     }
     public void Pause(bool isPaused) 
     {
-        if(isPaused)isPlaying = false;
-        else isPlaying = true;
+        if (isPaused)
+        {
+            isPlaying = false;
+            UIHandler.instance.ShowPanel(GameResult.Pause);
+        }
+        else
+        { 
+            isPlaying = true;
+            UIHandler.instance.RemoveAllPanels();
+        }
     }
     // Update is called once per frame
     void Update()

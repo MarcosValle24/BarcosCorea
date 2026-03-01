@@ -10,8 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     [SerializeField]private float speed;
     [SerializeField] private float initialSpeed;
-    [SerializeField] private Transform initialPos;
     [SerializeField] private float rotationSpeed;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
     
     [SerializeField]private InputAction controller;
     [SerializeField]private InputAction touchScreen;
@@ -30,12 +31,13 @@ public class PlayerMovement : MonoBehaviour
     public float GetRotationSpeed {  get { return rotationSpeed; } }
    public bool arrived {get;  set;}
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         arrived = false;
         initialSpeed = speed;
-        initialPos = gameObject.transform;
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
     }
     private void OnEnable()
     {
@@ -56,15 +58,21 @@ public class PlayerMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void OnGameStart()
     {
-        this.gameObject.transform.position = initialPos.position;
-        this.gameObject.transform.rotation = initialPos.rotation;
+        arrived = false;
         speed = initialSpeed;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+        isPressed = false;
     }
     // Update is called once per frame
     void Update()
     {
-      
-        if(arrived)
+        if (!GameManager.instance.isPlaying)
+            return;
+
+        if (arrived)
             StopBoat();
         else
         {
@@ -141,6 +149,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager.instance.isPlaying)
+        {
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
+
         rb.linearVelocity = transform.right * speed;
     }
 
