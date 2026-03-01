@@ -8,6 +8,7 @@ public class DcokScript : MonoBehaviour
       {
          other.GetComponent<PlayerMovement>().arrived = true;
          GameManager.instance.GameOver();
+         UIHandler.instance.ShowPanel(GameResult.Win);
       }
    }
 }

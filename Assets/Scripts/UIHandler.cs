@@ -7,7 +7,9 @@ public class UIHandler : MonoBehaviour
     public static UIHandler instance;
 
     [SerializeField] private TMP_Text timerText;
-
+    [SerializeField] private GameObject panelWin;
+    [SerializeField] private GameObject panelLose;
+    [SerializeField] private GameObject panelPause;
     void Awake()
     {
         if (instance != null && instance != this)
@@ -18,6 +20,7 @@ public class UIHandler : MonoBehaviour
         {
             instance = this;
         }
+        RemoveAllPanels();
     }
 
     public void UpdateTimer(string text)
@@ -27,8 +30,29 @@ public class UIHandler : MonoBehaviour
             timerText.text = text;
         }
     }
-
-    private void Update()
+    public void RemoveAllPanels()
     {
+        panelLose.SetActive(false);
+        panelPause.SetActive(false);
+        panelWin.SetActive(false);
+    }
+    public void ShowPanel(GameResult result)
+    {
+        panelLose.SetActive(false);
+        panelPause.SetActive(false);
+        panelWin.SetActive(false);
+
+        switch (result)
+        {
+            case GameResult.Win:
+                panelWin.SetActive(true);
+                break;
+            case GameResult.Pause:
+                panelPause.SetActive(true);
+                break;
+            case GameResult.Lose:
+                panelLose.SetActive(true);
+                break;
+        }
     }
 }

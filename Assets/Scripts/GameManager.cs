@@ -2,6 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum GameResult
+{
+    Win,
+    Lose,
+    Pause
+}
 public enum Mode
 {
     FreeTime,
@@ -54,14 +60,34 @@ public class GameManager : MonoBehaviour
             dock.SetActive(false);
         }
     }
-
+    public void Pause(bool isPaused) 
+    {
+        if(isPaused)isPlaying = false;
+        else isPlaying = true;
+    }
     // Update is called once per frame
     void Update()
     {
         if(isPlaying)
-        { 
-            
-        }
+        {
+            switch (gameMode)
+            {
+                case Mode.FreeTime:
+                    break;
+                case Mode.TimeMode:
+                    timer -= Time.deltaTime;
+                    int minutes = Mathf.FloorToInt(timer / 60f);
+                    int seconds = Mathf.FloorToInt(timer % 60f);
+
+                    UIHandler.instance.UpdateTimer(minutes.ToString("00") + ":" + seconds.ToString("00"));
+
+                    if (timer <= 0)
+                    {
+                        GameOver();
+                    }
+                    break;
+                }
+            }
     }
     public void FreeGameMode()
     {
@@ -72,15 +98,5 @@ public class GameManager : MonoBehaviour
     {
         gameMode = Mode.TimeMode;
         BeginPlay();
-        timer -= Time.deltaTime;
-        int minutes = Mathf.FloorToInt(timer / 60f);
-        int seconds = Mathf.FloorToInt(timer % 60f);
-
-        UIHandler.instance.UpdateTimer(minutes.ToString("00") + ":" + seconds.ToString("00"));
-
-        if (timer <= 0)
-        {
-            GameOver();
-        }
     }
 }
