@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -157,7 +158,18 @@ public class PlayerMovement : MonoBehaviour
 
         rb.linearVelocity = transform.right * speed;
     }
-
+    public void Crash()
+    {
+        Camera.main.transform.DOShakePosition(
+            duration: 0.3f,
+            strength: 0.5f,
+            vibrato: 10,
+            randomness: 90,
+            snapping: false,
+            fadeOut: true
+        );
+        rb.linearVelocity = Vector3.zero;
+    }
     void StopBoat()
     {
         if (speed > 0)

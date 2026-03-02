@@ -13,11 +13,6 @@ public class BoatMovement : MonoBehaviour
         Animation();
     }
 
-    private void Update()
-    {
-
-    }
-
     private void Animation()
     {
         DOTween.Kill(image);
@@ -26,5 +21,17 @@ public class BoatMovement : MonoBehaviour
             .DOBlendableRotateBy(new Vector3(10f, 3.0f, 0), 1f)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.InOutSine);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+
+            if (player != null)
+            {
+                player.Crash();
+            }
+        }
     }
 }
