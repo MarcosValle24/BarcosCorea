@@ -48,7 +48,8 @@ public class PlayerMovement : MonoBehaviour
         controller.Enable();
         touchScreen.Enable();
         click.Enable();
-        GameManager.instance.startGame.AddListener(OnGameStart);
+        GameManager.instance.StartFreeTimeGame.AddListener(OnGameStart);
+        GameManager.instance.StartTimeGame.AddListener(OnGameStart);
     }
 
     private void OnDisable()
@@ -56,7 +57,8 @@ public class PlayerMovement : MonoBehaviour
         controller.Disable();
         touchScreen.Disable();
         click.Disable();
-        GameManager.instance.startGame.RemoveAllListeners();
+        GameManager.instance.StartFreeTimeGame.RemoveListener(OnGameStart);
+        GameManager.instance.StartTimeGame.RemoveListener(OnGameStart);
     }
 
     private void OnGameStart()
