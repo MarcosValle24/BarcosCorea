@@ -6,7 +6,7 @@ public class UIHandler : MonoBehaviour
 {
     public static UIHandler instance;
 
-    [SerializeField] private TMP_Text timerText;
+    [SerializeField] public TMP_Text timerText;
     [SerializeField] private GameObject panelWin;
     [SerializeField] private GameObject panelLose;
     [SerializeField] private GameObject panelPause;

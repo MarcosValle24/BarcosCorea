@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -8,25 +9,26 @@ using UnityEngine.InputSystem.EnhancedTouch;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement")]
     private Rigidbody rb;
     [SerializeField]private float speed;
     [SerializeField] private float initialSpeed;
     [SerializeField] private float rotationSpeed;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
-    
+
+    [Header("Inputs")]
     [SerializeField]private InputAction controller;
     [SerializeField]private InputAction touchScreen;
     [SerializeField] private InputAction click;
-
     private Vector2 firstTouch;
     private Vector2 currentTouch;
     private Vector2 centerTouch;
     private bool isPressed;
-
-
+    public bool hasStopped;
     private float angle;
 
+    public UnityEvent OnStopped;
     public float GetAngle { get { return angle; } }
     public bool GetisPressed { get { return isPressed; } }
     public float GetRotationSpeed {  get { return rotationSpeed; } }
@@ -36,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         arrived = false;
+        hasStopped = false;
         initialSpeed = speed;
         initialPosition = transform.position;
         initialRotation = transform.rotation;
@@ -56,10 +59,10 @@ public class PlayerMovement : MonoBehaviour
         GameManager.instance.startGame.RemoveAllListeners();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void OnGameStart()
     {
         arrived = false;
+        hasStopped = false;
         speed = initialSpeed;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
@@ -67,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = initialRotation;
         isPressed = false;
     }
-    // Update is called once per frame
     void Update()
     {
         if (!GameManager.instance.isPlaying)
@@ -153,6 +155,7 @@ public class PlayerMovement : MonoBehaviour
         if (!GameManager.instance.isPlaying)
         {
             rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             return;
         }
 
@@ -169,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
             fadeOut: true
         );
         rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
     void StopBoat()
     {
@@ -178,8 +182,18 @@ public class PlayerMovement : MonoBehaviour
         } 
         else 
         {
+            if (!hasStopped)
+            {
+                hasStopped = true;
+                OnStopped?.Invoke();
+                RestartPosition();
+            }
             speed = 0;
         }
+    }
+    public void RestartPosition()
+    {
+        OnGameStart();
     }
     
 }
