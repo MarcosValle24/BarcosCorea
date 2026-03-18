@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &17966609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2639,8 +2639,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1286965735
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1990922474, guid: 61317b139e5ef6f4494e2c06002b1ef5, type: 3}
@@ -3344,13 +3344,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635318745}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13339241, y: -0, z: -0, w: 0.9910633}
-  m_LocalPosition: {x: -0.24700002, y: 1.36, z: 0}
+  m_LocalRotation: {x: 0.12556607, y: 0.33447602, z: 0.045018896, w: 0.9329159}
+  m_LocalPosition: {x: -0.24700007, y: 1.36, z: 0.000000039938787}
   m_LocalScale: {x: 0.28691843, y: 0.6632, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1620771679}
-  m_LocalEulerAnglesHint: {x: 15.331, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 11.781, y: 40.47, z: 9.881}
 --- !u!212 &635318747
 SpriteRenderer:
   serializedVersion: 2
@@ -3396,9 +3396,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1493160881
+  m_SortingLayer: 4
+  m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: ff6b23bf94847a040aa2373a5bb9c342, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -3869,7 +3869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &672114032
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4376,7 +4376,7 @@ Transform:
   m_GameObject: {fileID: 747104420}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: -4.4, y: 1.76, z: 1.18}
+  m_LocalPosition: {x: -4.4, y: 1.54, z: 1.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4427,9 +4427,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1239123193
+  m_SortingLayer: 2
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 72cbded596a07458d9a2895d11a0a362, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5059,9 +5059,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1493160881
+  m_SortingLayer: 4
+  m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: ff6b23bf94847a040aa2373a5bb9c342, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -7537,9 +7537,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1493160881
+  m_SortingLayer: 4
+  m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: ff6b23bf94847a040aa2373a5bb9c342, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -8508,7 +8508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1620771676
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8595,14 +8595,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620771675}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.53381157, z: -0, w: 0.8456035}
+  m_LocalRotation: {x: -0, y: -0.5294532, z: -0, w: 0.8483392}
   m_LocalPosition: {x: 2.88, y: -0.563, z: 7.47}
   m_LocalScale: {x: 3.4577718, y: 1, z: 1.4924}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 635318746}
   m_Father: {fileID: 318789287}
-  m_LocalEulerAnglesHint: {x: 0, y: -64.527, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -63.937, z: 0}
 --- !u!54 &1620771680
 Rigidbody:
   m_ObjectHideFlags: 0
