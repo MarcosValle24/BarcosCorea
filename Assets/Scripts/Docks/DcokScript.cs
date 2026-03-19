@@ -17,7 +17,9 @@ public class DcokScript : MonoBehaviour
         if (GameManager.instance.hasFish == true)
         {
             player.arrived = true;
+            player.RestartPosition();
         }
+
     }
     void ArriveTime(PlayerMovement player)
     {

@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class FishMovement : MonoBehaviour
+public class FishAnimationMovement : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer image;
     private Transform startPos;

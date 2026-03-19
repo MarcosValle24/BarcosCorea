@@ -10,12 +10,12 @@ public class FreeGameMode : MonoBehaviour
     void Start()
     {
         player.OnStopped.AddListener(HandlePlayerStopped);
-        GameManager.instance.StartTimeGame.AddListener(RemoveTimeUI);
+        GameManager.instance.StartFreeTimeGame.AddListener(RemoveTimeUI);
     }
     void OnDisable()
     {
         player.OnStopped.RemoveListener(HandlePlayerStopped);
-        GameManager.instance.StartTimeGame.RemoveListener(RemoveTimeUI);
+        GameManager.instance.StartFreeTimeGame.RemoveListener(RemoveTimeUI);
     }
     void RemoveTimeUI()
     {

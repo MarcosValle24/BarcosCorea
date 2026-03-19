@@ -71,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         isPressed = false;
+        GameManager.instance.hasFish = false;
     }
     void Update()
     {
@@ -165,6 +166,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Crash()
     {
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         Camera.main.transform.DOShakePosition(
             duration: 0.3f,
             strength: 0.5f,
@@ -173,8 +176,6 @@ public class PlayerMovement : MonoBehaviour
             snapping: false,
             fadeOut: true
         );
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
     }
     void StopBoat()
     {

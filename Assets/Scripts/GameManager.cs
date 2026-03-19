@@ -64,10 +64,6 @@ public class GameManager : MonoBehaviour
             UIHandler.instance.RemoveAllPanels();
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-    }
     public void FreeGameMode()
     {
         gameMode = Mode.FreeTime;
