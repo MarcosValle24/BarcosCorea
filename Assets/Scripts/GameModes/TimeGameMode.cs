@@ -3,6 +3,7 @@ using UnityEngine;
 public class TimeGameMode : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
+    [SerializeField] private UIHandler uiHandler;
     [SerializeField] private float maxTime;
     private float timer = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,12 +14,11 @@ public class TimeGameMode : MonoBehaviour
     }
     void setValues()
     {
-        UIHandler.instance.timerText.gameObject.SetActive(true);
         timer = maxTime;
     }
     void HandlePlayerStopped()
     {
-        UIHandler.instance.ShowPanel(GameResult.Win);
+        uiHandler.ShowPanel(GameResult.Win);
     }
     // Update is called once per frame
     void Update()
@@ -31,11 +31,11 @@ public class TimeGameMode : MonoBehaviour
             int minutes = Mathf.FloorToInt(timer / 60f);
             int seconds = Mathf.FloorToInt(timer % 60f);
 
-            UIHandler.instance.UpdateTimer(minutes.ToString("00") + ":" + seconds.ToString("00"));
+           // UIHandler.instance.UpdateTimer(minutes.ToString("00") + ":" + seconds.ToString("00"));
 
             if (timer <= 0)
             {
-                GameManager.instance.GameOver();
+                uiHandler.ShowPanel(GameResult.Lose);
             }
         }
         

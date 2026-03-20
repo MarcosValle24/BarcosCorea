@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public enum GameResult
 {
@@ -16,29 +18,29 @@ public enum Mode
 public class GameManager : MonoBehaviour
 {
     public static  GameManager instance;
-    [SerializeField] private FreeGameMode freeGameMode;
-    [SerializeField] private TimeGameMode timeGameMode;
+    //[SerializeField] private FreeGameMode freeGameMode;
+    //[SerializeField] private TimeGameMode timeGameMode;
     [SerializeField] private float maxTime;
 
     public Mode gameMode;
     public bool hasFish;
+    public bool isPlaying = false;
+
     public UnityEvent StartFreeTimeGame;
     public UnityEvent StartTimeGame;
     public UnityEvent FinishGame;
 
-    public bool isPlaying = false;
 
     void Awake()
     {
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
+            return;
         }
-        else
-        {
-            instance = this;
-        }
-        
+
+        instance = this;
+        DontDestroyOnLoad(gameObject); 
     }
 
     public void BeginPlay()
@@ -49,19 +51,18 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isPlaying = false;
-        UIHandler.instance.ShowPanel(GameResult.Lose);
     }
     public void Pause(bool isPaused) 
     {
         if (isPaused)
         {
             isPlaying = false;
-            UIHandler.instance.ShowPanel(GameResult.Pause);
+            //UIHandler.instance.ShowPanel(GameResult.Pause);
         }
         else
         { 
             isPlaying = true;
-            UIHandler.instance.RemoveAllPanels();
+            //UIHandler.instance.RemoveAllPanels();
         }
     }
     public void FreeGameMode()
@@ -69,11 +70,14 @@ public class GameManager : MonoBehaviour
         gameMode = Mode.FreeTime;
         StartFreeTimeGame?.Invoke();
         BeginPlay();
+        SceneManager.LoadScene("TimeMode");
     }
     public void TimeGameMode()
     {
         gameMode = Mode.TimeMode;
         StartTimeGame?.Invoke();
         BeginPlay();
+        SceneManager.LoadScene("FreeMode");
+
     }
 }

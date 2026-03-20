@@ -43,13 +43,15 @@ public class PlayerMovement : MonoBehaviour
         initialPosition = transform.position;
         initialRotation = transform.rotation;
     }
+    private void Start()
+    {
+        OnGameStart();
+    }
     private void OnEnable()
     {
         controller.Enable();
         touchScreen.Enable();
         click.Enable();
-        GameManager.instance.StartFreeTimeGame.AddListener(OnGameStart);
-        GameManager.instance.StartTimeGame.AddListener(OnGameStart);
     }
 
     private void OnDisable()
@@ -57,8 +59,6 @@ public class PlayerMovement : MonoBehaviour
         controller.Disable();
         touchScreen.Disable();
         click.Disable();
-        GameManager.instance.StartFreeTimeGame.RemoveListener(OnGameStart);
-        GameManager.instance.StartTimeGame.RemoveListener(OnGameStart);
     }
 
     private void OnGameStart()

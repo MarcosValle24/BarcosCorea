@@ -6,11 +6,9 @@ public class FreeGameMode : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
     [SerializeField]private List<GameObject> Fish = new List<GameObject>();
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player.OnStopped.AddListener(HandlePlayerStopped);
-        GameManager.instance.StartFreeTimeGame.AddListener(RemoveTimeUI);
     }
     void OnDisable()
     {
@@ -19,7 +17,7 @@ public class FreeGameMode : MonoBehaviour
     }
     void RemoveTimeUI()
     {
-        UIHandler.instance.timerText.gameObject.SetActive(false);
+        //UIHandler.instance.timerText.gameObject.SetActive(false);
     }
     void HandlePlayerStopped()
     {

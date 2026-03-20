@@ -4,22 +4,12 @@ using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
-    public static UIHandler instance;
-
     [SerializeField] public TMP_Text timerText;
     [SerializeField] private GameObject panelWin;
     [SerializeField] private GameObject panelLose;
     [SerializeField] private GameObject panelPause;
     void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
         RemoveAllPanels();
     }
 
@@ -35,6 +25,7 @@ public class UIHandler : MonoBehaviour
         panelLose.SetActive(false);
         panelPause.SetActive(false);
         panelWin.SetActive(false);
+        GameManager.instance.Pause(false);
     }
     public void ShowPanel(GameResult result)
     {
