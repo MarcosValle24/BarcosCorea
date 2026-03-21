@@ -17,9 +17,8 @@ public class DockScript : MonoBehaviour
         if (player.hasFish == true)
         {
             player.arrived = true;
-            player.RestartPosition();
+            player.ArrivedWithFish(this.transform);
         }
-
     }
     void ArriveTime(PlayerMovement player)
     {

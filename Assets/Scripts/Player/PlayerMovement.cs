@@ -1,9 +1,11 @@
 using DG.Tweening;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.UIElements;
 
 
 [RequireComponent(typeof(Rigidbody))]
@@ -30,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private float angle;
 
     public UnityEvent OnStopped;
+    public UnityEvent OnFishArrived;
     public float GetAngle { get { return angle; } }
     public bool GetisPressed { get { return isPressed; } }
     public float GetRotationSpeed {  get { return rotationSpeed; } }
@@ -66,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnGameStart()
     {
+        GameManager.instance.isPlaying = true;
         arrived = false;
         hasStopped = false;
         hasFish= false; 
@@ -183,6 +187,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void StopBoat()
     {
+        GameManager.instance.isPlaying = false;
         if (speed > 0)
         {
             speed-=Time.deltaTime*0.2f;
@@ -202,5 +207,31 @@ public class PlayerMovement : MonoBehaviour
     {
         OnGameStart();
     }
-    
+    public void ArrivedWithFish(Transform dockRight)
+    {
+        hasFish = false;
+        StopAllCoroutines();
+        StartCoroutine(LookAtDockRight(dockRight));
+    }
+    IEnumerator LookAtDockRight(Transform dockRight)
+    {
+        Vector3 dockDirection = -dockRight.right;
+        dockDirection.y = 0;
+        dockDirection.Normalize();
+        Quaternion targetRotation = Quaternion.LookRotation(dockDirection);
+        GameManager.instance.isPlaying = false;
+
+        while (true)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);           
+            float dot = Vector3.Dot(transform.forward, dockDirection);
+
+            if (dot >= 0.99f) break;
+
+            yield return null;
+        }
+        GameManager.instance.isPlaying = true;
+        hasStopped = false;
+    }
+
 }

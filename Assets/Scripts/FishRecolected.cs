@@ -7,17 +7,13 @@ public class FishRecolected : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.instance.hasFish = true;
+            other.GetComponent<PlayerMovement>().hasFish = true;
+            Recolected();
         }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Recolected()
     {
-        
+        Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

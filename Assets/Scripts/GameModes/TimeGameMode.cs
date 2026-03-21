@@ -14,6 +14,7 @@ public class TimeGameMode : MonoBehaviour
         player.OnStopped.AddListener(HandlePlayerStopped);
         GameManager.instance.gameResult = GameResult.Playing;
         GameManager.instance.gameMode = Mode.TimeMode;
+        GameManager.instance.isPlaying = true;
         //dockManager.ActivateRandomDock();
     }
     void SetValues()

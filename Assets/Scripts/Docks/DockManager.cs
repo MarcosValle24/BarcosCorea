@@ -11,6 +11,10 @@ public class DockManager : MonoBehaviour
         DeactivateDocks();
         ActivateRandomDock();
     }
+    private void OnDisable()
+    {
+        
+    }
     public void DeactivateDocks()
     {
         foreach (GameObject dock in docks)
