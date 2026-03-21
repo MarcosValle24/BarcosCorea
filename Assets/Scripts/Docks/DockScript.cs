@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class DcokScript : MonoBehaviour
+public class DockScript : MonoBehaviour
 {
    void OnTriggerEnter(Collider other)
    {
@@ -14,7 +14,7 @@ public class DcokScript : MonoBehaviour
    }
     void ArrivedFreeTime(PlayerMovement player)
     {
-        if (GameManager.instance.hasFish == true)
+        if (player.hasFish == true)
         {
             player.arrived = true;
             player.RestartPosition();

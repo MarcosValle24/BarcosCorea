@@ -499,7 +499,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   maxTime: 25
   gameMode: 0
+  gameResult: 0
   hasFish: 0
+  isPlaying: 0
   StartFreeTimeGame:
     m_PersistentCalls:
       m_Calls: []
@@ -509,7 +511,6 @@ MonoBehaviour:
   FinishGame:
     m_PersistentCalls:
       m_Calls: []
-  isPlaying: 0
 --- !u!4 &318789287
 Transform:
   m_ObjectHideFlags: 0
@@ -1346,7 +1347,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 318789286}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: FreeGameMode
+        m_MethodName: OpenFreeGameMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1731,7 +1732,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 318789286}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: TimeGameMode
+        m_MethodName: OpenTimeGameMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

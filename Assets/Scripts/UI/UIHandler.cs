@@ -8,7 +8,8 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject panelWin;
     [SerializeField] private GameObject panelLose;
     [SerializeField] private GameObject panelPause;
-    void Awake()
+
+    private void Start()
     {
         RemoveAllPanels();
     }
@@ -45,5 +46,25 @@ public class UIHandler : MonoBehaviour
                 panelLose.SetActive(true);
                 break;
         }
+    }
+
+    public void ShowPausePanel()
+    {
+        ShowPanel(GameResult.Pause);
+        GameManager.instance.Pause(true);
+    }
+    public void ShowLosePanel()
+    {
+        ShowPanel(GameResult.Lose);
+    }
+    public void ShowWinPanel()
+    {
+        ShowPanel(GameResult.Win);
+    }
+    public void ResumeGame()
+    {
+        RemoveAllPanels();
+        GameManager.instance.Pause(false);
+        //GameManager.instance.gameResult = GameResult.Playing;
     }
 }

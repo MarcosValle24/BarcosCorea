@@ -4,26 +4,31 @@ public class TimeGameMode : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
     [SerializeField] private UIHandler uiHandler;
+    [SerializeField] private DockManagerTimeMode dockManager;
     [SerializeField] private float maxTime;
     private float timer = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        SetValues();
         player.OnStopped.AddListener(HandlePlayerStopped);
-        GameManager.instance.StartTimeGame.AddListener(setValues);   
+        GameManager.instance.gameResult = GameResult.Playing;
+        GameManager.instance.gameMode = Mode.TimeMode;
+        //dockManager.ActivateRandomDock();
     }
-    void setValues()
+    void SetValues()
     {
         timer = maxTime;
     }
     void HandlePlayerStopped()
     {
         uiHandler.ShowPanel(GameResult.Win);
+        GameManager.instance.gameResult = GameResult.Win;
     }
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.instance.isPlaying) return;
+        if (GameManager.instance.gameResult != GameResult.Playing) return;
 
         if (GameManager.instance.gameMode == Mode.TimeMode && !player.arrived)
         {
@@ -31,13 +36,23 @@ public class TimeGameMode : MonoBehaviour
             int minutes = Mathf.FloorToInt(timer / 60f);
             int seconds = Mathf.FloorToInt(timer % 60f);
 
-           // UIHandler.instance.UpdateTimer(minutes.ToString("00") + ":" + seconds.ToString("00"));
+            uiHandler.UpdateTimer(minutes.ToString("00") + ":" + seconds.ToString("00"));
 
             if (timer <= 0)
             {
                 uiHandler.ShowPanel(GameResult.Lose);
+                GameManager.instance.gameResult = GameResult.Lose;
             }
         }
         
+    }
+    public void RestartGame()
+    {
+        SetValues();
+        player.RestartPosition();
+        dockManager.DeactivateDocks();
+        dockManager.ActivateRandomDock();
+        uiHandler.RemoveAllPanels();
+        GameManager.instance.gameResult = GameResult.Playing;
     }
 }

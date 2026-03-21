@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 centerTouch;
     private bool isPressed;
     public bool hasStopped;
+    public bool hasFish;
     private float angle;
 
     public UnityEvent OnStopped;
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         arrived = false;
         hasStopped = false;
+        hasFish = false;
         initialSpeed = speed;
         initialPosition = transform.position;
         initialRotation = transform.rotation;
@@ -52,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Enable();
         touchScreen.Enable();
         click.Enable();
+        OnGameStart();
     }
 
     private void OnDisable()
@@ -65,18 +68,19 @@ public class PlayerMovement : MonoBehaviour
     {
         arrived = false;
         hasStopped = false;
+        hasFish= false; 
         speed = initialSpeed;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         isPressed = false;
-        GameManager.instance.hasFish = false;
     }
     void Update()
     {
         if (!GameManager.instance.isPlaying)
             return;
+
 
         if (arrived)
             StopBoat();
@@ -189,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 hasStopped = true;
                 OnStopped?.Invoke();
-                RestartPosition();
+                //RestartPosition();
             }
             speed = 0;
         }

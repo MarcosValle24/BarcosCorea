@@ -1,31 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DockManager : MonoBehaviour
+public class DockManagerFreeMode : MonoBehaviour
 {
-    public static DockManager instance;   
     [SerializeField] private List<GameObject> docks;
     private GameObject currentDock;
 
     private void Start()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
         DeactivateDocks();
-        if (GameManager.instance != null)
-        {
-            GameManager.instance.StartTimeGame.AddListener(ActivateRandomDock);
-            GameManager.instance.StartFreeTimeGame.AddListener(ActivateRandomDock);
-            GameManager.instance.FinishGame.AddListener(DeactivateDocks);
-        }
+        ActivateRandomDock();
     }
-    private void DeactivateDocks()
+    public void DeactivateDocks()
     {
         foreach (GameObject dock in docks)
         {

@@ -8,7 +8,9 @@ public enum GameResult
 {
     Win,
     Lose,
-    Pause
+    Pause,
+    Playing,
+    Menus
 }
 public enum Mode
 {
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float maxTime;
 
     public Mode gameMode;
+    public GameResult gameResult;
     public bool hasFish;
     public bool isPlaying = false;
 
@@ -51,33 +54,40 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isPlaying = false;
+        gameResult = GameResult.Lose;
     }
     public void Pause(bool isPaused) 
     {
         if (isPaused)
         {
             isPlaying = false;
-            //UIHandler.instance.ShowPanel(GameResult.Pause);
+            gameResult=GameResult.Pause;
         }
         else
         { 
             isPlaying = true;
-            //UIHandler.instance.RemoveAllPanels();
+            gameResult = GameResult.Playing;
         }
     }
-    public void FreeGameMode()
+    public void OpenFreeGameMode()
     {
         gameMode = Mode.FreeTime;
+        gameResult = GameResult.Playing; 
         StartFreeTimeGame?.Invoke();
+        BeginPlay();
+        SceneManager.LoadScene("FreeMode");
+    }
+    public void OpenTimeGameMode()
+    {
+        gameMode = Mode.TimeMode;
+        gameResult = GameResult.Playing;
+        StartTimeGame?.Invoke();
         BeginPlay();
         SceneManager.LoadScene("TimeMode");
     }
-    public void TimeGameMode()
+    public void OpenMainMenu()
     {
-        gameMode = Mode.TimeMode;
-        StartTimeGame?.Invoke();
-        BeginPlay();
-        SceneManager.LoadScene("FreeMode");
-
+        gameResult = GameResult.Menus;
+        SceneManager.LoadScene("Menu");
     }
 }
