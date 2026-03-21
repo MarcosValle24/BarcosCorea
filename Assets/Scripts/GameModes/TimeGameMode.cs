@@ -4,7 +4,7 @@ public class TimeGameMode : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
     [SerializeField] private UIHandler uiHandler;
-    [SerializeField] private DockManagerTimeMode dockManager;
+    [SerializeField] private DockManager dockManager;
     [SerializeField] private float maxTime;
     private float timer = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,6 +45,10 @@ public class TimeGameMode : MonoBehaviour
             }
         }
         
+    }
+    public void QuitToMainMenu()
+    {
+        GameManager.instance.OpenMainMenu();
     }
     public void RestartGame()
     {

@@ -22,7 +22,10 @@ public class TimonMovement : MonoBehaviour
 
         if (playerAngleMovement.GetisPressed == true)
         {
-            transform.Rotate(Vector3.forward * playerAngleMovement.GetAngle);
+            float angle = playerAngleMovement.GetAngle;
+            float playerRotationSpeed = playerAngleMovement.rotationSpeed;
+            //transform.localRotation = Quaternion.Euler(0, 0, -targetAngle);
+            transform.Rotate(Vector3.forward * angle * playerRotationSpeed);
         }
 
     }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DockManagerFreeMode : MonoBehaviour
+public class DockManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> docks;
     private GameObject currentDock;

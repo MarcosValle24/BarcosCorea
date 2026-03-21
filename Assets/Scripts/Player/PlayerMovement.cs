@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     [SerializeField]private float speed;
     [SerializeField] private float initialSpeed;
-    [SerializeField] private float rotationSpeed;
+    [SerializeField] public float rotationSpeed;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
 
@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
         angle = Vector2.SignedAngle(firstTouch, currentVector);
 
-        transform.Rotate(Vector3.up * angle * rotationSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up * angle * rotationSpeed);//* Time.deltaTime);
 
         firstTouch = currentVector;
     }
@@ -152,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
 
         angle = Vector2.SignedAngle(firstTouch, currentVector);
 
-        transform.Rotate(Vector3.up * angle * rotationSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up * angle * rotationSpeed);
 
         firstTouch = currentVector;
     }
