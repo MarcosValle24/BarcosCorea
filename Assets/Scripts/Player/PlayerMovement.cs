@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
     private float angle;
 
     public UnityEvent OnStopped;
-    public UnityEvent OnFishArrived;
     public float GetAngle { get { return angle; } }
     public bool GetisPressed { get { return isPressed; } }
     public float GetRotationSpeed {  get { return rotationSpeed; } }
@@ -57,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         controller.Enable();
         touchScreen.Enable();
         click.Enable();
-        OnGameStart();
     }
 
     private void OnDisable()
@@ -69,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnGameStart()
     {
-        GameManager.instance.isPlaying = true;
         arrived = false;
         hasStopped = false;
         hasFish= false; 
@@ -79,15 +76,15 @@ public class PlayerMovement : MonoBehaviour
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         isPressed = false;
+        GameManager.instance.isPlaying = true;
     }
     void Update()
     {
-        if (!GameManager.instance.isPlaying)
-            return;
-
-
         if (arrived)
             StopBoat();
+
+        if (!GameManager.instance.isPlaying)
+            return;
         else
         {
             float value = controller.ReadValue<float>(); 
@@ -198,7 +195,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 hasStopped = true;
                 OnStopped?.Invoke();
-                //RestartPosition();
             }
             speed = 0;
         }
@@ -232,6 +228,7 @@ public class PlayerMovement : MonoBehaviour
         }
         GameManager.instance.isPlaying = true;
         hasStopped = false;
+        arrived = false;
     }
 
 }

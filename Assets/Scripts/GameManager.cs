@@ -20,9 +20,6 @@ public enum Mode
 public class GameManager : MonoBehaviour
 {
     public static  GameManager instance;
-    //[SerializeField] private FreeGameMode freeGameMode;
-    //[SerializeField] private TimeGameMode timeGameMode;
-    [SerializeField] private float maxTime;
 
     public Mode gameMode;
     public GameResult gameResult;

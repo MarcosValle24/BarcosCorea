@@ -13,14 +13,13 @@ public class FreeGameMode : MonoBehaviour
     void Start()
     {
         player.OnStopped.AddListener(HandlePlayerStopped);
-        player.OnFishArrived.AddListener(ArrivedWithFish);
         GameManager.instance.isPlaying = true;
         GameManager.instance.gameResult = GameResult.Playing;
         GameManager.instance.gameMode = Mode.FreeTime;
     }
     private void OnDisable()
     {
-        player.OnFishArrived.RemoveListener(ArrivedWithFish);
+        //player.OnStopped.RemoveListener(HandlePlayerStopped);
     }
     void SetValues()
     {
@@ -50,6 +49,7 @@ public class FreeGameMode : MonoBehaviour
     }
     void ArrivedWithFish()
     {
+        Debug.Log("Arrived");
         SpawnFish();
         dockManager.ActivateRandomDock();
         fishRecolected++;

@@ -65,6 +65,5 @@ public class UIHandler : MonoBehaviour
     {
         RemoveAllPanels();
         GameManager.instance.Pause(false);
-        //GameManager.instance.gameResult = GameResult.Playing;
     }
 }
