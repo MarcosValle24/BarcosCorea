@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private float speed;
     [SerializeField] private float initialSpeed;
     [SerializeField] public float rotationSpeed;
+    [SerializeField] public float stopSpeed;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
 
@@ -30,7 +31,8 @@ public class PlayerMovement : MonoBehaviour
     public bool hasStopped;
     public bool hasFish;
     private float angle;
-
+    private Transform currentDock;
+    private bool rotateAfterStop;
     public UnityEvent OnStopped;
     public float GetAngle { get { return angle; } }
     public bool GetisPressed { get { return isPressed; } }
@@ -69,7 +71,8 @@ public class PlayerMovement : MonoBehaviour
     {
         arrived = false;
         hasStopped = false;
-        hasFish= false; 
+        hasFish= false;
+        rotateAfterStop = false;
         speed = initialSpeed;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
@@ -160,13 +163,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!GameManager.instance.isPlaying)
+        if (!GameManager.instance.isPlaying && !hasStopped)
         {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             return;
         }
-
         rb.linearVelocity = transform.right * speed;
     }
     public void Crash()
@@ -187,14 +189,27 @@ public class PlayerMovement : MonoBehaviour
         GameManager.instance.isPlaying = false;
         if (speed > 0)
         {
-            speed-=Time.deltaTime*0.2f;
+            speed-=Time.deltaTime* stopSpeed;
+            if (!hasStopped)
+            {
+                hasStopped = true;
+                if (rotateAfterStop)
+                {
+                    rotateAfterStop = false;
+                    StartCoroutine(LookAtDockRight(currentDock));
+                }
+            }
         } 
         else 
         {
             if (!hasStopped)
             {
                 hasStopped = true;
-                OnStopped?.Invoke();
+                if (rotateAfterStop)
+                {
+                    rotateAfterStop = false;
+                    StartCoroutine(LookAtDockRight(currentDock));
+                }
             }
             speed = 0;
         }
@@ -205,30 +220,44 @@ public class PlayerMovement : MonoBehaviour
     }
     public void ArrivedWithFish(Transform dockRight)
     {
+        GameManager.instance.isPlaying = false;
+        arrived = true;
         hasFish = false;
         StopAllCoroutines();
         StartCoroutine(LookAtDockRight(dockRight));
     }
     IEnumerator LookAtDockRight(Transform dockRight)
     {
-        Vector3 dockDirection = -dockRight.right;
+        Vector3 dockDirection = dockRight.TransformDirection(-Vector3.forward);
         dockDirection.y = 0;
         dockDirection.Normalize();
         Quaternion targetRotation = Quaternion.LookRotation(dockDirection);
-        GameManager.instance.isPlaying = false;
 
         while (true)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);           
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);          
             float dot = Vector3.Dot(transform.forward, dockDirection);
 
             if (dot >= 0.99f) break;
 
             yield return null;
         }
-        GameManager.instance.isPlaying = true;
-        hasStopped = false;
-        arrived = false;
+        OnStopped?.Invoke();
+        ResetAfterArrival();
     }
-
+    public void ResetAfterArrival()
+    {
+        arrived = false;
+        hasStopped = false;
+        GameManager.instance.isPlaying = true;
+        speed = initialSpeed;
+    }
+    public void BeginStop(Transform dock)
+    {
+        arrived = true;                
+        currentDock = dock;
+        rotateAfterStop = true;
+        hasFish = false;
+        GameManager.instance.isPlaying = false;
+    }
 }

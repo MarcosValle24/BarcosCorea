@@ -53,6 +53,7 @@ public class FreeGameMode : MonoBehaviour
         SpawnFish();
         dockManager.ActivateRandomDock();
         fishRecolected++;
+        player.ResetAfterArrival();
     }
 
 }

@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
 
     public Mode gameMode;
     public GameResult gameResult;
-    public bool hasFish;
     public bool isPlaying = false;
 
     public UnityEvent StartFreeTimeGame;

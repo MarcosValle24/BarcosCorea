@@ -6,7 +6,6 @@ public class FishRecolected : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.hasFish = true;
             other.GetComponent<PlayerMovement>().hasFish = true;
             Recolected();
         }
