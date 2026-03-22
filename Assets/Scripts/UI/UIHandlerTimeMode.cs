@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIHandler : MonoBehaviour
+public class UIHandlerTimeMode : MonoBehaviour
 {
     [SerializeField] public TMP_Text timerText;
     [SerializeField] private GameObject panelWin;

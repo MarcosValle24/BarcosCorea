@@ -3,7 +3,7 @@ using UnityEngine;
 public class TimeGameMode : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
-    [SerializeField] private UIHandler uiHandler;
+    [SerializeField] private UIHandlerTimeMode uiHandler;
     [SerializeField] private DockManager dockManager;
     [SerializeField] private float maxTime;
     private float timer = 0;

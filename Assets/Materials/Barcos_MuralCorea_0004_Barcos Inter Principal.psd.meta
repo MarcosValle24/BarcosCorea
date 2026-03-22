@@ -121,12 +121,166 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0004_Barcos Inter Principal_0
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 1327
+        width: 573
+        height: 454
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 287074003a215bc46809a62665d61274
+      internalID: 1357431633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0004_Barcos Inter Principal_1
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 688
+        width: 391
+        height: 293
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89ddd0a4c52b60f459c7eb118609bfbb
+      internalID: -1552140059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0004_Barcos Inter Principal_2
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 685
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bec1bdf96d50eff4fac3b6e8d6716369
+      internalID: -1723468113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0004_Barcos Inter Principal_3
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 678
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df9d35e07e7c7a8419075016a090d2ea
+      internalID: -929332159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0004_Barcos Inter Principal_4
+      rect:
+        serializedVersion: 2
+        x: 1243
+        y: 670
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef0d0eab4239527409d63e9ea36567c4
+      internalID: -2093674504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0004_Barcos Inter Principal_5
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 674
+        width: 29
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e43687a4c9b33cf4cb83d95336127199
+      internalID: 1621317925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0004_Barcos Inter Principal_6
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 655
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35677e6e56d94c74ea88bffe76222897
+      internalID: 272750675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 83a38cb1be54fea45ac7a9e1a5ab0d84
     internalID: 0
     vertices: []
     indices: 
@@ -134,8 +288,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Barcos_MuralCorea_0004_Barcos Inter Principal_0: 1357431633
+      Barcos_MuralCorea_0004_Barcos Inter Principal_1: -1552140059
+      Barcos_MuralCorea_0004_Barcos Inter Principal_2: -1723468113
+      Barcos_MuralCorea_0004_Barcos Inter Principal_3: -929332159
+      Barcos_MuralCorea_0004_Barcos Inter Principal_4: -2093674504
+      Barcos_MuralCorea_0004_Barcos Inter Principal_5: 1621317925
+      Barcos_MuralCorea_0004_Barcos Inter Principal_6: 272750675
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

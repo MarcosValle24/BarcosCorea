@@ -121,12 +121,100 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0002_Barquitos 1_0
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 1202
+        width: 299
+        height: 314
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd8f6b50b2bd791469d165557f65d413
+      internalID: -1103192418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0002_Barquitos 1_1
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 511
+        width: 695
+        height: 819
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fea7e7295304bd74c893908efd4d39af
+      internalID: 805619765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0002_Barquitos 1_2
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 1181
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfe6c3c419b4456439d92b5f8530bfb8
+      internalID: 1610477735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0002_Barquitos 1_3
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 1149
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef3a4a13499244543b868abdf008c84d
+      internalID: 161862826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 92e82bfaecf5ee84facd050d2756c18e
     internalID: 0
     vertices: []
     indices: 
@@ -134,8 +222,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Barcos_MuralCorea_0002_Barquitos 1_0: -1103192418
+      Barcos_MuralCorea_0002_Barquitos 1_1: 805619765
+      Barcos_MuralCorea_0002_Barquitos 1_2: 1610477735
+      Barcos_MuralCorea_0002_Barquitos 1_3: 161862826
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

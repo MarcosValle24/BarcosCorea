@@ -6,10 +6,11 @@ using UnityEngine;
 public class FreeGameMode : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
-    [SerializeField] private UIHandler uiHandler;
+    [SerializeField] private UIHandlerFreeMode uiHandler;
     [SerializeField] private DockManager dockManager;
     [SerializeField] private FishManager fishManager;
-    [SerializeField] private int fishRecolected;
+    [SerializeField] public int fishRecolected;
+    [SerializeField] public string playerName;
     void Start()
     {
         player.OnStopped.AddListener(HandlePlayerStopped);

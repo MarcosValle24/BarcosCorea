@@ -22,9 +22,10 @@ public class ScoreboardList
 public class Scoreboard : MonoBehaviour
 {
     private string filePath;
-    public ScoreboardList scoreboard = new ScoreboardList();
-    public TextMeshProUGUI scoreBoardText;
-
+    private ScoreboardList scoreboard = new ScoreboardList();
+    private TextMeshProUGUI scoreBoardText;
+    [SerializeField] private TMP_InputField nameInput;
+    [SerializeField] private FreeGameMode gameMode;
     [Header("Tests")]
     public string testName;
     public int testScore;
@@ -32,6 +33,17 @@ public class Scoreboard : MonoBehaviour
     {
         filePath = Path.Combine(Application.persistentDataPath, "scoreboard.json");
         LoadScoreboard();
+    }
+    public void AddName()
+    {
+        if (string.IsNullOrWhiteSpace(nameInput.text))
+        {
+            Debug.LogWarning("No hay nombere");
+            return;
+        }
+
+        gameMode.playerName = nameInput.text.Trim();
+
     }
     public void AddScore(string playerName, int score)
     {
@@ -43,6 +55,11 @@ public class Scoreboard : MonoBehaviour
         SortScoreBoard();
         ShowScoreBoard();
         SaveScoreboard();
+    }
+    public void AddScore()
+    {
+        AddName();
+        AddScore(gameMode.playerName, gameMode.fishRecolected);
     }
     void SaveScoreboard()
     {

@@ -47,8 +47,14 @@ TagManager:
   - name: Muelles
     uniqueID: 1239123193
     locked: 0
-  - name: Barco
+  - name: Barcos
+    uniqueID: 2910347969
+    locked: 0
+  - name: Jugador
     uniqueID: 3008001561
+    locked: 0
+  - name: Personas
+    uniqueID: 2691916847
     locked: 0
   - name: Flechas
     uniqueID: 1493160881

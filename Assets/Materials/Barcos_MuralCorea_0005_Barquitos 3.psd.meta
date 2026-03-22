@@ -121,12 +121,166 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0005_Barquitos 3_0
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 1823
+        width: 227
+        height: 347
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d142e31590b3b5409817407e8a356d9
+      internalID: 92802323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0005_Barquitos 3_1
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 1729
+        width: 875
+        height: 441
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba8e05c1138d35047a51af89a05131c1
+      internalID: 1836966951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0005_Barquitos 3_2
+      rect:
+        serializedVersion: 2
+        x: 1351
+        y: 2027
+        width: 253
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2120924b067fd74e9fd5e89bf65cbea
+      internalID: 1662308340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0005_Barquitos 3_3
+      rect:
+        serializedVersion: 2
+        x: 1703
+        y: 1928
+        width: 303
+        height: 242
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7aab1ece1e355a4095c7afac5bf19da
+      internalID: -502413900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0005_Barquitos 3_4
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 1804
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14a844bf49c09644cae756df30fdaf70
+      internalID: 820227862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0005_Barquitos 3_5
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 1783
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa9c3fc3e3388454899e316ed5346262
+      internalID: 538906864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barcos_MuralCorea_0005_Barquitos 3_6
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 1726
+        width: 620
+        height: 444
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceea3122150d6af42a2cb8e2dd6dc895
+      internalID: 879652786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 456daa30e3b8ca847a6a90ac110a9aea
     internalID: 0
     vertices: []
     indices: 
@@ -134,8 +288,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+      - key: SpriteEditor.SliceOnImport
+        value: False
+    nameFileIdTable:
+      Barcos_MuralCorea_0005_Barquitos 3_0: 92802323
+      Barcos_MuralCorea_0005_Barquitos 3_1: 1836966951
+      Barcos_MuralCorea_0005_Barquitos 3_2: 1662308340
+      Barcos_MuralCorea_0005_Barquitos 3_3: -502413900
+      Barcos_MuralCorea_0005_Barquitos 3_4: 820227862
+      Barcos_MuralCorea_0005_Barquitos 3_5: 538906864
+      Barcos_MuralCorea_0005_Barquitos 3_6: 879652786
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
