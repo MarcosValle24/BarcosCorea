@@ -398,7 +398,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -497,10 +497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2f88547cb6e5e429542dc457b668bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  maxTime: 25
   gameMode: 0
   gameResult: 0
-  hasFish: 0
   isPlaying: 0
   StartFreeTimeGame:
     m_PersistentCalls:
@@ -509,6 +507,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   FinishGame:
+    m_PersistentCalls:
+      m_Calls: []
+  LoseFreeMode:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &318789287
@@ -1120,11 +1121,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8681d5f744db840a885c9087fb67fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scoreboard
-  scoreboard:
-    scores: []
   scoreBoardText: {fileID: 308411322}
+  nameInput: {fileID: 0}
+  gameMode: {fileID: 0}
   testName: 
   testScore: 0
+  OnEnterScore:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &602101325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,8 +1624,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

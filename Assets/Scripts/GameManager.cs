@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent StartFreeTimeGame;
     public UnityEvent StartTimeGame;
     public UnityEvent FinishGame;
+    public UnityEvent LoseFreeMode;
 
 
     void Awake()

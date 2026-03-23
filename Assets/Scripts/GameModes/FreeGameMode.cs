@@ -9,14 +9,17 @@ public class FreeGameMode : MonoBehaviour
     [SerializeField] private UIHandlerFreeMode uiHandler;
     [SerializeField] private DockManager dockManager;
     [SerializeField] private FishManager fishManager;
+    [SerializeField] private Scoreboard scoreboard;
     [SerializeField] public int fishRecolected;
     [SerializeField] public string playerName;
     void Start()
     {
         player.OnStopped.AddListener(HandlePlayerStopped);
+        player.OnCrashed.AddListener(Lose);
         GameManager.instance.isPlaying = true;
         GameManager.instance.gameResult = GameResult.Playing;
         GameManager.instance.gameMode = Mode.FreeTime;
+        scoreboard.OnEnterScore.AddListener(uiHandler.ShowScorePanel);
     }
     private void OnDisable()
     {
@@ -55,6 +58,14 @@ public class FreeGameMode : MonoBehaviour
         dockManager.ActivateRandomDock();
         fishRecolected++;
         player.ResetAfterArrival();
+    }
+    void Lose()
+    {
+        uiHandler.EnterScorePanel();
+        uiHandler.ShowFishRecolected(fishRecolected.ToString());
+        GameManager.instance.gameResult = GameResult.Lose;
+        GameManager.instance.isPlaying = false;
+
     }
 
 }

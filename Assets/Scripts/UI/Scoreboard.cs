@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using static UnityEngine.GraphicsBuffer;
 
@@ -23,13 +24,14 @@ public class Scoreboard : MonoBehaviour
 {
     private string filePath;
     private ScoreboardList scoreboard = new ScoreboardList();
-    private TextMeshProUGUI scoreBoardText;
+    [SerializeField]private TextMeshProUGUI scoreBoardText;
     [SerializeField] private TMP_InputField nameInput;
     [SerializeField] private FreeGameMode gameMode;
     [Header("Tests")]
     public string testName;
     public int testScore;
-    void Awake()
+    public UnityEvent OnEnterScore;
+    private void OnEnable()
     {
         filePath = Path.Combine(Application.persistentDataPath, "scoreboard.json");
         LoadScoreboard();
@@ -43,6 +45,9 @@ public class Scoreboard : MonoBehaviour
         }
 
         gameMode.playerName = nameInput.text.Trim();
+        AddScore(gameMode.playerName, gameMode.fishRecolected);
+        nameInput.text = "";
+        OnEnterScore?.Invoke();
 
     }
     public void AddScore(string playerName, int score)
@@ -59,7 +64,6 @@ public class Scoreboard : MonoBehaviour
     public void AddScore()
     {
         AddName();
-        AddScore(gameMode.playerName, gameMode.fishRecolected);
     }
     void SaveScoreboard()
     {

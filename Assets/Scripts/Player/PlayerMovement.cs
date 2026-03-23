@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform currentDock;
     private bool rotateAfterStop;
     public UnityEvent OnStopped;
+    public UnityEvent OnCrashed;
     public float GetAngle { get { return angle; } }
     public bool GetisPressed { get { return isPressed; } }
     public float GetRotationSpeed {  get { return rotationSpeed; } }
@@ -186,32 +187,42 @@ public class PlayerMovement : MonoBehaviour
     }
     void StopBoat()
     {
-        GameManager.instance.isPlaying = false;
         if (speed > 0)
         {
             speed-=Time.deltaTime* stopSpeed;
-            if (!hasStopped)
-            {
-                hasStopped = true;
-                if (rotateAfterStop)
-                {
-                    rotateAfterStop = false;
-                    StartCoroutine(LookAtDockRight(currentDock));
-                }
-            }
+            //if (!hasStopped)
+            //{
+            //    hasStopped = true;
+            //    if(GameManager.instance.gameMode == Mode.TimeMode)
+            //    {
+            //        OnStopped?.Invoke();
+            //        return;
+            //    }
+            //    if (rotateAfterStop)
+            //    {
+            //        rotateAfterStop = false;
+            //        StartCoroutine(LookAtDockRight(currentDock));
+            //    }
+            //}
         } 
         else 
         {
             if (!hasStopped)
             {
+                GameManager.instance.isPlaying = false;
                 hasStopped = true;
+                if (GameManager.instance.gameMode == Mode.TimeMode)
+                {
+                    OnStopped?.Invoke();
+                    return;
+                }
                 if (rotateAfterStop)
                 {
                     rotateAfterStop = false;
                     StartCoroutine(LookAtDockRight(currentDock));
                 }
+                speed = 0;
             }
-            speed = 0;
         }
     }
     public void RestartPosition()
@@ -254,10 +265,15 @@ public class PlayerMovement : MonoBehaviour
     }
     public void BeginStop(Transform dock)
     {
-        arrived = true;                
+        speed = 0;
+        arrived = true;
         currentDock = dock;
         rotateAfterStop = true;
         hasFish = false;
         GameManager.instance.isPlaying = false;
+    }
+    public void CrashFreeMode()
+    {
+        if (GameManager.instance.gameMode == Mode.FreeTime) OnCrashed?.Invoke();
     }
 }

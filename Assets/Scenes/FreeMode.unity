@@ -533,7 +533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &131358279
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1385,9 +1385,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FreeGameMode
   player: {fileID: 973189715}
-  uiHandler: {fileID: 0}
+  uiHandler: {fileID: 1873539764}
   dockManager: {fileID: 340235223}
   fishManager: {fileID: 871613482}
+  scoreboard: {fileID: 460087027}
   fishRecolected: 0
   playerName: 
 --- !u!4 &340235222
@@ -1724,6 +1725,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370086971}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &370570122
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1523966708644387444, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_Name
+      value: BoatCrashNLose
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158857684290868583, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158857684290868583, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158857684290868583, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158857684290868583, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158857684290868583, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158857684290868583, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158857684290868583, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158857684290868583, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158857684290868583, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158857684290868583, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158857684290868583, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
 --- !u!1 &377248998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,8 +1981,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+      - m_Target: {fileID: 1873539764}
+        m_TargetAssemblyTypeName: UIHandlerFreeMode, Assembly-CSharp
         m_MethodName: ShowPausePanel
         m_Mode: 1
         m_Arguments:
@@ -2173,10 +2235,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8681d5f744db840a885c9087fb67fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scoreboard
+  scoreBoardText: {fileID: 1123357586}
   nameInput: {fileID: 1338806379}
   gameMode: {fileID: 340235221}
   testName: 
   testScore: 0
+  OnEnterScore:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &487023080
 GameObject:
   m_ObjectHideFlags: 0
@@ -4117,7 +4183,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.33, y: 0, z: 1.88}
-  m_LocalScale: {x: 20, y: 1, z: 20}
+  m_LocalScale: {x: 15.4818, y: 1, z: 15.0244}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4293,6 +4359,9 @@ MonoBehaviour:
   OnStopped:
     m_PersistentCalls:
       m_Calls: []
+  OnCrashed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &973189716
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4423,7 +4492,7 @@ GameObject:
   - component: {fileID: 997882529}
   - component: {fileID: 997882528}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: txt_fishRecolected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4589,6 +4658,9 @@ MonoBehaviour:
   FinishGame:
     m_PersistentCalls:
       m_Calls: []
+  LoseFreeMode:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1017019068
 Transform:
   m_ObjectHideFlags: 0
@@ -4630,7 +4702,7 @@ Transform:
   m_GameObject: {fileID: 1039374572}
   serializedVersion: 2
   m_LocalRotation: {x: -0.13052624, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -10.1, y: 0, z: 1.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5280,8 +5352,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+      - m_Target: {fileID: 1873539764}
+        m_TargetAssemblyTypeName: UIHandlerFreeMode, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
@@ -5786,10 +5858,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8681d5f744db840a885c9087fb67fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scoreboard
-  nameInput: {fileID: 0}
+  scoreBoardText: {fileID: 1291318813}
+  nameInput: {fileID: 1338806379}
   gameMode: {fileID: 340235221}
   testName: 
   testScore: 0
+  OnEnterScore:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1250443752
 GameObject:
   m_ObjectHideFlags: 0
@@ -9304,6 +9380,7 @@ MonoBehaviour:
   panelPause: {fileID: 2048453354}
   panelEnterScore: {fileID: 131358278}
   panelShowScore: {fileID: 1238851359}
+  fishText: {fileID: 997882528}
 --- !u!1 &1913447786
 GameObject:
   m_ObjectHideFlags: 0
@@ -10832,3 +10909,4 @@ SceneRoots:
   - {fileID: 201115423}
   - {fileID: 871613480}
   - {fileID: 1205493259}
+  - {fileID: 370570122}
