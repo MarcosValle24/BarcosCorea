@@ -20,6 +20,7 @@ public class FreeGameMode : MonoBehaviour
         GameManager.instance.gameResult = GameResult.Playing;
         GameManager.instance.gameMode = Mode.FreeTime;
         scoreboard.OnEnterScore.AddListener(uiHandler.ShowScorePanel);
+        uiHandler.ShowFishGameUI(fishRecolected.ToString());
     }
     private void OnDisable()
     {
@@ -58,6 +59,7 @@ public class FreeGameMode : MonoBehaviour
         dockManager.ActivateRandomDock();
         fishRecolected++;
         player.ResetAfterArrival();
+        uiHandler.ShowFishGameUI(fishRecolected.ToString());
     }
     void Lose()
     {

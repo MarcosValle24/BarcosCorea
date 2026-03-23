@@ -7,7 +7,8 @@ public class UIHandlerFreeMode : MonoBehaviour
     [SerializeField] private GameObject panelPause;
     [SerializeField] private GameObject panelEnterScore;
     [SerializeField] private GameObject panelShowScore;
-    [SerializeField] private TextMeshProUGUI fishText;
+    [SerializeField] private TextMeshProUGUI fishTextEnterScore;
+    [SerializeField] private TextMeshProUGUI recolectedFishGameUI;
 
     private void Start()
     {
@@ -59,6 +60,10 @@ public class UIHandlerFreeMode : MonoBehaviour
     }
     public void ShowFishRecolected(string fishInt)
     {
-        fishText.text = $"Recolectaste: {fishInt} peces!";
+        fishTextEnterScore.text = $"Recolectaste: {fishInt} peces!";
+    }
+    public void ShowFishGameUI(string fishInt)
+    {
+        recolectedFishGameUI.text = $"Peces: {fishInt}!";
     }
 }
