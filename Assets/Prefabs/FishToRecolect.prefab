@@ -186,3 +186,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d780e2144d176f44a9d4883b575e7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishRecolected
+  confettiFX: {fileID: 1079728442285870052, guid: 013d6ddd413ee6a459bc46abdfa42382, type: 3}
