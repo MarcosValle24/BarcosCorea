@@ -10,6 +10,8 @@ public class UIAnim : MonoBehaviour
         scale,
     }
     [SerializeField] private animType currentAnim = animType.translate;
+    [SerializeField] private Vector3 translateOffset = Vector3.zero;
+    [SerializeField] private float duration = 0.25f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     
@@ -18,9 +20,13 @@ public class UIAnim : MonoBehaviour
         {
             case animType.translate:
                 animSequence.Append(
-                        GetComponent<RectTransform>().DOMoveY(GetComponent<RectTransform>().position.y + 10, 0.5f,true))
+                        GetComponent<RectTransform>().DOMove(new Vector3(GetComponent<RectTransform>().position.x + translateOffset.x,
+                                                                                    GetComponent<RectTransform>().position.y + translateOffset.y,
+                                                                                    GetComponent<RectTransform>().position.z + translateOffset.z),duration,true))
                 .AppendInterval(.25f)
-                .Append(GetComponent<RectTransform>().DOMoveY(GetComponent<RectTransform>().position.y - 10, 0.5f,true))
+                .Append(GetComponent<RectTransform>().DOMove(new Vector3(GetComponent<RectTransform>().position.x - translateOffset.x,
+                                                                            GetComponent<RectTransform>().position.y - translateOffset.y,
+                                                                            GetComponent<RectTransform>().position.z - translateOffset.z), duration,true))
                 .AppendInterval(.25f);
                 break;
             case animType.rotate:
