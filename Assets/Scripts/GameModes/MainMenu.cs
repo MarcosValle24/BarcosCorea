@@ -1,13 +1,33 @@
+using System.Collections;
 using UnityEngine;
+
 
 public class MainMenu : MonoBehaviour
 {
-    public void OpenFreeGameMode()
+    [SerializeField] private Animator transitionAnimator;
+    
+    public void ChangeScene(bool time)
     {
-        GameManager.instance.OpenFreeGameMode();
+      StartCoroutine(OpenGameMode(time));
+       
     }
-    public void OpenTimeGameMode()
+ 
+
+    IEnumerator OpenGameMode(bool time)
     {
-        GameManager.instance.OpenTimeGameMode();
+        if (time)
+        {
+            transitionAnimator.SetTrigger("Fade");
+            yield return new WaitForSeconds(2f);
+            GameManager.instance.OpenTimeGameMode();
+        }
+        else
+        {
+            transitionAnimator.SetTrigger("Fade");
+            yield return new WaitForSeconds(2f);
+            GameManager.instance.OpenFreeGameMode();
+            
+        }
     }
+    
 }

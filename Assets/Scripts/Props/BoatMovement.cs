@@ -6,10 +6,12 @@ public class BoatMovement : MonoBehaviour
     [SerializeField] private SpriteRenderer image;
     private Transform startPos;
     private BoxCollider boxCollider;
+    private ParticleSystem particles;
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
         image = GetComponentInChildren<SpriteRenderer>();
+        particles = GetComponentInChildren<ParticleSystem>();
         Animation();
     }
 
@@ -26,6 +28,7 @@ public class BoatMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            particles.Play();
             PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
 
             if (player != null)
