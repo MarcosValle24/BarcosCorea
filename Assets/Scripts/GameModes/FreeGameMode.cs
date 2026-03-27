@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,11 +17,13 @@ public class FreeGameMode : MonoBehaviour
     {
         player.OnStopped.AddListener(HandlePlayerStopped);
         player.OnCrashed.AddListener(Lose);
+        player.OnRecolectedFish.AddListener(RecolectedFish);
         GameManager.instance.isPlaying = true;
         GameManager.instance.gameResult = GameResult.Playing;
         GameManager.instance.gameMode = Mode.FreeTime;
         scoreboard.OnEnterScore.AddListener(uiHandler.ShowScorePanel);
         uiHandler.ShowFishGameUI(fishRecolected.ToString());
+        SpawnFish();
     }
     private void OnDisable()
     {
@@ -43,8 +46,8 @@ public class FreeGameMode : MonoBehaviour
         SetValues();
         player.RestartPosition();
         dockManager.DeactivateDocks();
-        dockManager.ActivateRandomDock();
         uiHandler.RemoveAllPanels();
+        SpawnFish();
         GameManager.instance.gameResult = GameResult.Playing;
         GameManager.instance.isPlaying = true;
     }
@@ -56,10 +59,11 @@ public class FreeGameMode : MonoBehaviour
     {
         Debug.Log("Arrived");
         SpawnFish();
-        dockManager.ActivateRandomDock();
         fishRecolected++;
         player.ResetAfterArrival();
         uiHandler.ShowFishGameUI(fishRecolected.ToString());
+        StopCoroutine(DeactivateDockAfterPlayingFX());
+        StartCoroutine(DeactivateDockAfterPlayingFX());
     }
     void Lose()
     {
@@ -69,5 +73,13 @@ public class FreeGameMode : MonoBehaviour
         GameManager.instance.isPlaying = false;
 
     }
-
+    void RecolectedFish()
+    {
+        dockManager.ActivateRandomDock();
+    }
+    IEnumerator DeactivateDockAfterPlayingFX()
+    {
+        yield return new WaitForSeconds(1f);
+        dockManager.DeactivateDocks();
+    }
 }

@@ -4,12 +4,22 @@ public class FishRecolected : MonoBehaviour
 {
     [Header("Particlee")]
     [SerializeField] private ParticleSystem confettiFX;
+    [SerializeField] private AudioClip collectSound;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerMovement>().hasFish = true;
-            Recolected();
+
+            PlayerMovement playerRef = other.GetComponent<PlayerMovement>();
+            if (playerRef != null)
+            {
+                playerRef.hasFish = true;
+                playerRef.OnRecolectedFish?.Invoke();
+                Recolected();
+                Debug.Log("Choco con pex");
+            }
+                Debug.Log("Choco con pex");
+
         }
     }
     private void Recolected()
@@ -18,6 +28,15 @@ public class FishRecolected : MonoBehaviour
         {
             ParticleSystem fx = Instantiate(confettiFX,transform.position,Quaternion.identity);
             Destroy(fx.gameObject, fx.main.duration);
+        }
+        if (collectSound != null)
+        {
+            GameObject audioGO = new GameObject("FishCollectAudio");
+            AudioSource audio = audioGO.AddComponent<AudioSource>();
+            audio.clip = collectSound;
+            audio.Play();
+
+            Destroy(audioGO, collectSound.length);
         }
         Destroy(gameObject);
     }

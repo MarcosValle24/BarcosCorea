@@ -6,21 +6,10 @@ public class FishAnimationMovement : MonoBehaviour
     [SerializeField] private SpriteRenderer image;
     private Transform startPos;
     private BoxCollider boxCollider;
-    private bool isJumping;
     private void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
-        boxCollider.enabled = false;
         image = GetComponentInChildren<SpriteRenderer>();
         Animation();
-    }
-
-    private void Update()
-    {
-        if (!isJumping)
-        {
-
-        }
     }
 
     private void Animation()

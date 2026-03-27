@@ -1840,6 +1840,9 @@ MonoBehaviour:
   OnCrashed:
     m_PersistentCalls:
       m_Calls: []
+  OnRecolectedFish:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &239026391
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8016,7 +8019,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.05
+  m_fontSize: 68.55
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14664,6 +14667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2076741d19c06b24782da31dabc6cb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DcokScript
+  arrow: {fileID: 0}
 --- !u!54 &938966223
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15519,7 +15523,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.05
+  m_fontSize: 68.55
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -25331,6 +25335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2076741d19c06b24782da31dabc6cb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DcokScript
+  arrow: {fileID: 0}
 --- !u!54 &2034511662
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26010,6 +26015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2076741d19c06b24782da31dabc6cb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DcokScript
+  arrow: {fileID: 0}
 --- !u!54 &2115960833
 Rigidbody:
   m_ObjectHideFlags: 0

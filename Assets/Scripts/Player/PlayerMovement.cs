@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private bool rotateAfterStop;
     public UnityEvent OnStopped;
     public UnityEvent OnCrashed;
+    public UnityEvent OnRecolectedFish;
     public float GetAngle { get { return angle; } }
     public bool GetisPressed { get { return isPressed; } }
     public float GetRotationSpeed {  get { return rotationSpeed; } }

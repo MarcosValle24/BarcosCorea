@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DockScript : MonoBehaviour
 {
+    [SerializeField]private GameObject arrow;
     ParticleSystem arrivedParticles;
     AudioSource arrivedSound;
 
@@ -16,8 +17,6 @@ public class DockScript : MonoBehaviour
    {
       if (other.CompareTag("Player"))
       {
-          arrivedParticles.Play();
-          arrivedSound.Play();
          PlayerMovement playerRef = other.GetComponent<PlayerMovement>();
          if (GameManager.instance.gameMode == Mode.FreeTime) ArrivedFreeTime(playerRef);   
          else if (GameManager.instance.gameMode == Mode.TimeMode) ArriveTime(playerRef);   
@@ -28,10 +27,16 @@ public class DockScript : MonoBehaviour
         if (player.hasFish == true)
         {
             player.BeginStop(this.transform);
+            arrivedParticles.Play();
+            arrivedSound.Play();
+            arrow.SetActive(false);
         }
     }
     void ArriveTime(PlayerMovement player)
     {
         player.arrived = true;
+        arrivedParticles.Play();
+        arrivedSound.Play();
+        arrow.SetActive(false);
     }
 }

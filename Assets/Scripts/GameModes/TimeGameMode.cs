@@ -29,7 +29,7 @@ public class TimeGameMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.gameResult != GameResult.Playing) return;
+        if (GameManager.instance.gameResult != GameResult.Playing || !GameManager.instance.isPlaying) return;
 
         if (GameManager.instance.gameMode == Mode.TimeMode && !player.arrived)
         {

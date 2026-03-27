@@ -9,7 +9,6 @@ public class DockManager : MonoBehaviour
     private void Start()
     {
         DeactivateDocks();
-        ActivateRandomDock();
     }
     private void OnDisable()
     {
@@ -26,10 +25,18 @@ public class DockManager : MonoBehaviour
     public void ActivateRandomDock()
     {
         DeactivateDocks();
-        if (currentDock != null)
-            currentDock.SetActive(false);
 
         currentDock = docks[Random.Range(0, docks.Count)];
-        currentDock.SetActive(true);
+        SetDockAndChildrenActive(currentDock);
     }
+    void SetDockAndChildrenActive(GameObject dock)
+    {
+        dock.SetActive(true);
+
+        foreach (Transform child in dock.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+    }
+
 }

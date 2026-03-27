@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class FishManager : MonoBehaviour
 {
-    [SerializeField] private GameObject Fish;
+    [SerializeField] private GameObject FishPrefab;
+    [SerializeField] private GameObject FishRef;
     [SerializeField] private int fishToSpawn;
     private BoxCollider box;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         box = GetComponent<BoxCollider>();
-        SpawnFish();
     }
     public void SpawnFish()
     {
+        if(FishRef != null) Destroy(FishRef);
         GetRandomPoint();
-        Instantiate(Fish, GetRandomPoint(), Quaternion.identity);
+        FishRef=Instantiate(FishPrefab, GetRandomPoint(), Quaternion.identity);
     }
     Vector3 GetRandomPoint()
     {
