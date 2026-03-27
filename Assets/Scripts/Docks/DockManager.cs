@@ -6,7 +6,7 @@ public class DockManager : MonoBehaviour
     [SerializeField] private List<GameObject> docks;
     private GameObject currentDock;
 
-    private void Start()
+    private void Awake()
     {
         DeactivateDocks();
     }

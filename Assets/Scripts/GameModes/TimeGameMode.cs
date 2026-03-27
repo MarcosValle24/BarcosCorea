@@ -15,7 +15,7 @@ public class TimeGameMode : MonoBehaviour
         GameManager.instance.gameResult = GameResult.Playing;
         GameManager.instance.gameMode = Mode.TimeMode;
         GameManager.instance.isPlaying = true;
-        //dockManager.ActivateRandomDock();
+        dockManager.ActivateRandomDock();
     }
     void SetValues()
     {
