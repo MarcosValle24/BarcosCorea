@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion initialRotation;
 
     [Header("Inputs")]
+    [SerializeField] private PlayerInput playerInput;
     [SerializeField]private InputAction controller;
     [SerializeField]private InputAction touchScreen;
     [SerializeField] private InputAction click;
@@ -36,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     public UnityEvent OnStopped;
     public UnityEvent OnCrashed;
     public UnityEvent OnRecolectedFish;
+    [Header("Events")]
+    [SerializeField] private PlayerEvents playerEvents;
     public float GetAngle { get { return angle; } }
     public bool GetisPressed { get { return isPressed; } }
     public float GetRotationSpeed {  get { return rotationSpeed; } }
