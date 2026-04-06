@@ -7,10 +7,9 @@ public class BoatNLose : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerMovement playerRef = collision.gameObject.GetComponent<PlayerMovement>();
-            if (playerRef != null)
-            {
-                playerRef.CrashFreeMode();
-            }
+            if (playerRef == null) return;
+
+            playerRef.Crash();
         }
     }
 }

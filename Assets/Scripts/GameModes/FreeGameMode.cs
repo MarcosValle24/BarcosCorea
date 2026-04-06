@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class FreeGameMode : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement player;
+    [SerializeField] private PlayerEvents playerEvents;
+    [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private UIHandlerFreeMode uiHandler;
     [SerializeField] private DockManager dockManager;
     [SerializeField] private FishManager fishManager;
@@ -15,27 +16,20 @@ public class FreeGameMode : MonoBehaviour
     [SerializeField] public string playerName;
     void Start()
     {
-        player.OnStopped.AddListener(HandlePlayerStopped);
-        player.OnCrashed.AddListener(Lose);
-        player.OnRecolectedFish.AddListener(RecolectedFish);
-        GameManager.instance.isPlaying = true;
-        GameManager.instance.gameResult = GameResult.Playing;
-        GameManager.instance.gameMode = Mode.FreeTime;
+        playerEvents.OnStopped.AddListener(ArrivedWithFish);
+        playerEvents.OnCrashed.AddListener(Lose);
+        playerEvents.OnFishRecolected.AddListener(RecolectedFish);
         scoreboard.OnEnterScore.AddListener(uiHandler.ShowScorePanel);
         uiHandler.ShowFishGameUI(fishRecolected.ToString());
         SpawnFish();
     }
     private void OnDisable()
     {
-        //player.OnStopped.RemoveListener(HandlePlayerStopped);
+
     }
     void SetValues()
     {
         fishRecolected = 0;
-    }
-    void HandlePlayerStopped()
-    {
-        ArrivedWithFish();
     }
     public void QuitToMainMenu()
     {
@@ -44,34 +38,35 @@ public class FreeGameMode : MonoBehaviour
     public void RestartGame()
     {
         SetValues();
-        player.RestartPosition();
+        playerMovement.RestartPosition();
         dockManager.DeactivateDocks();
         uiHandler.RemoveAllPanels();
         SpawnFish();
         GameManager.instance.gameResult = GameResult.Playing;
-        GameManager.instance.isPlaying = true;
     }
     void SpawnFish()
     {
         fishManager.SpawnFish();
+    }
+    void RemoveFishes()
+    {
+        fishManager.DestroyAllFishes();
     }
     void ArrivedWithFish()
     {
         Debug.Log("Arrived");
         SpawnFish();
         fishRecolected++;
-        player.ResetAfterArrival();
         uiHandler.ShowFishGameUI(fishRecolected.ToString());
         StopCoroutine(DeactivateDockAfterPlayingFX());
         StartCoroutine(DeactivateDockAfterPlayingFX());
     }
     void Lose()
     {
+        RemoveFishes();
         uiHandler.EnterScorePanel();
         uiHandler.ShowFishRecolected(fishRecolected.ToString());
-        GameManager.instance.gameResult = GameResult.Lose;
-        GameManager.instance.isPlaying = false;
-
+        GameManager.instance.SetResult(GameResult.Lose);
     }
     void RecolectedFish()
     {

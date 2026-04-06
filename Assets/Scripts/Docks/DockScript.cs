@@ -18,25 +18,18 @@ public class DockScript : MonoBehaviour
       if (other.CompareTag("Player"))
       {
          PlayerMovement playerRef = other.GetComponent<PlayerMovement>();
-         if (GameManager.instance.gameMode == Mode.FreeTime) ArrivedFreeTime(playerRef);   
-         else if (GameManager.instance.gameMode == Mode.TimeMode) ArriveTime(playerRef);   
+            if (playerRef != null)
+            {
+                Arrived(playerRef);
+            }
       }
    }
-    void ArrivedFreeTime(PlayerMovement player)
+    void Arrived(PlayerMovement player)
     {
-        if (player.hasFish == true)
-        {
             player.BeginStop(this.transform);
             arrivedParticles.Play();
             arrivedSound.Play();
             arrow.SetActive(false);
-        }
-    }
-    void ArriveTime(PlayerMovement player)
-    {
-        player.arrived = true;
-        arrivedParticles.Play();
-        arrivedSound.Play();
-        arrow.SetActive(false);
+        
     }
 }

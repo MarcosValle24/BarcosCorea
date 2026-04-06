@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.UIElements;
 
 
@@ -15,41 +16,24 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     [SerializeField]private float speed;
     [SerializeField] private float initialSpeed;
-    [SerializeField] public float rotationSpeed;
-    [SerializeField] public float stopSpeed;
+    [SerializeField] private float stopSpeed;
+    [SerializeField] private float rotationSpeed;
+
     private Vector3 initialPosition;
     private Quaternion initialRotation;
 
-    [Header("Inputs")]
+    [Header("References")]
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField]private InputAction controller;
-    [SerializeField]private InputAction touchScreen;
-    [SerializeField] private InputAction click;
-    private Vector2 firstTouch;
-    private Vector2 currentTouch;
-    private Vector2 centerTouch;
-    private bool isPressed;
-    public bool hasStopped;
-    public bool hasFish;
-    private float angle;
-    private Transform currentDock;
-    private bool rotateAfterStop;
-    public UnityEvent OnStopped;
-    public UnityEvent OnCrashed;
-    public UnityEvent OnRecolectedFish;
-    [Header("Events")]
+    [SerializeField] private PlayerState playerState;
     [SerializeField] private PlayerEvents playerEvents;
-    public float GetAngle { get { return angle; } }
-    public bool GetisPressed { get { return isPressed; } }
-    public float GetRotationSpeed {  get { return rotationSpeed; } }
-   public bool arrived {get;  set;}
+   
+    private Transform currentDock;
 
+    private bool hasFish;
+    public bool HasFish {  get { return hasFish; } }
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        arrived = false;
-        hasStopped = false;
-        hasFish = false;
         initialSpeed = speed;
         initialPosition = transform.position;
         initialRotation = transform.rotation;
@@ -58,226 +42,143 @@ public class PlayerMovement : MonoBehaviour
     {
         OnGameStart();
     }
-    private void OnEnable()
-    {
-        controller.Enable();
-        touchScreen.Enable();
-        click.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controller.Disable();
-        touchScreen.Disable();
-        click.Disable();
-    }
 
     private void OnGameStart()
     {
-        arrived = false;
-        hasStopped = false;
-        hasFish= false;
-        rotateAfterStop = false;
+        playerState.ResetState();
         speed = initialSpeed;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         transform.position = initialPosition;
         transform.rotation = initialRotation;
-        isPressed = false;
-        GameManager.instance.isPlaying = true;
     }
     void Update()
     {
-        if (arrived)
-            StopBoat();
-
-        if (!GameManager.instance.isPlaying)
-            return;
-        else
-        {
-            float value = controller.ReadValue<float>(); 
-            float rotationMove = value * rotationSpeed;
-        
-            transform.Rotate(Vector3.up * rotationMove*Time.deltaTime);
+        if (playerState.IsPlayerState(PlayerStateType.Moving)){
+            BoatRotation();
         }
-        if (UsingTouch()) TouchInput();
-        else MouseInput();
     }
-    private bool UsingTouch()
-    {
-        return Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed;
-    }
-    void TouchInput()
-    {
-        if (Touchscreen.current == null) return;
-
-        var touch = Touchscreen.current.primaryTouch;
-
-        if (!touch.press.isPressed)
-        {
-            isPressed = false;
-            return;
-        }
-
-        Vector2 pos = touch.position.ReadValue();
-
-        if (!isPressed)
-        {
-            centerTouch = pos;
-            firstTouch = pos - centerTouch;
-            isPressed = true;
-            return;
-        }
-
-        Vector2 currentVector = pos - centerTouch;
-
-        angle = Vector2.SignedAngle(firstTouch, currentVector);
-
-        transform.Rotate(Vector3.up * angle * rotationSpeed);//* Time.deltaTime);
-
-        firstTouch = currentVector;
-    }
-    void MouseInput()
-    {
-        if (Mouse.current == null) return;
-
-        if (!click.IsPressed())
-        {
-            isPressed = false;
-            return;
-        }
-
-        Vector2 pos = Mouse.current.position.ReadValue();
-
-        if (!isPressed)
-        {
-            centerTouch = pos;
-            firstTouch = pos - centerTouch; 
-            isPressed = true;
-            return;
-        }
-
-        Vector2 currentVector = pos - centerTouch;
-
-        angle = Vector2.SignedAngle(firstTouch, currentVector);
-
-        transform.Rotate(Vector3.up * angle * rotationSpeed);
-
-        firstTouch = currentVector;
-    }
-
     void FixedUpdate()
     {
-        if (!GameManager.instance.isPlaying && !hasStopped)
+        switch (playerState.currentState)
         {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            return;
+            case PlayerStateType.Moving:
+                Move();
+                break;
+            case PlayerStateType.Paused:
+                Paused();
+                break;
+            case PlayerStateType.Rotating:
+                Rotate();
+                break;
+            case PlayerStateType.Stopping:
+                StopBoat();
+                break;
+            case PlayerStateType.Crashed:
+                break;
+            default:
+                break;
         }
-        rb.linearVelocity = transform.right * speed;
     }
-    public void Crash()
+    private void Paused()
     {
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        Camera.main.transform.DOShakePosition(
-            duration: 0.3f,
-            strength: 0.5f,
-            vibrato: 10,
-            randomness: 90,
-            snapping: false,
-            fadeOut: true
-        );
+    }
+    private void Move()
+    {
+        rb.linearVelocity = transform.right * speed;
+    }
+    private void BoatRotation()
+    {
+        if (!playerInput.GetIsPressed) return;
+
+        transform.Rotate(Vector3.up * playerInput.GetAngle * playerInput.GetRotationSpeed * rotationSpeed);
+    }
+    #region Crash
+    public void Crash()
+    {
+        if (playerState.IsPlayerState(PlayerStateType.Crashed))
+            return;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        playerState.SetState(PlayerStateType.Crashed);
+        playerEvents.Crashed();
+
+        Camera.main.transform.DOShakePosition(0.3f, 0.5f, 10, 90, false, true);
+    }
+    public void RecoverFromCrash()
+    {
+        playerState.SetState(PlayerStateType.Moving);
+    }
+    #endregion 
+    #region stop
+    public void BeginStop(Transform dock)
+    {
+        currentDock = dock;
+        playerState.SetState(PlayerStateType.Stopping);
     }
     void StopBoat()
     {
         if (speed > 0)
         {
             speed-=Time.deltaTime* stopSpeed;
-            //if (!hasStopped)
-            //{
-            //    hasStopped = true;
-            //    if(GameManager.instance.gameMode == Mode.TimeMode)
-            //    {
-            //        OnStopped?.Invoke();
-            //        return;
-            //    }
-            //    if (rotateAfterStop)
-            //    {
-            //        rotateAfterStop = false;
-            //        StartCoroutine(LookAtDockRight(currentDock));
-            //    }
-            //}
+            rb.linearVelocity = transform.right * speed;
         } 
         else 
         {
-            if (!hasStopped)
-            {
-                GameManager.instance.isPlaying = false;
-                hasStopped = true;
-                if (GameManager.instance.gameMode == Mode.TimeMode)
-                {
-                    OnStopped?.Invoke();
-                    return;
-                }
-                if (rotateAfterStop)
-                {
-                    rotateAfterStop = false;
-                    StartCoroutine(LookAtDockRight(currentDock));
-                }
-                speed = 0;
-            }
+            speed = 0;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            playerState.SetState(PlayerStateType.Rotating); 
+            playerEvents.PlayerStopped();
         }
     }
+    #endregion 
     public void RestartPosition()
     {
         OnGameStart();
     }
-    public void ArrivedWithFish(Transform dockRight)
+    #region BoatDockRotation
+
+    private void Rotate()
     {
-        GameManager.instance.isPlaying = false;
-        arrived = true;
-        hasFish = false;
-        StopAllCoroutines();
-        StartCoroutine(LookAtDockRight(dockRight));
-    }
-    IEnumerator LookAtDockRight(Transform dockRight)
-    {
-        Vector3 dockDirection = dockRight.TransformDirection(-Vector3.forward);
+        if (currentDock == null) return;
+
+        Vector3 dockDirection = currentDock.TransformDirection(-Vector3.forward);
         dockDirection.y = 0;
         dockDirection.Normalize();
+
         Quaternion targetRotation = Quaternion.LookRotation(dockDirection);
 
-        while (true)
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            targetRotation,
+            180f * Time.deltaTime
+        );
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        float dot = Vector3.Dot(transform.forward, dockDirection);
+
+        if (dot >= 0.99f)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);          
-            float dot = Vector3.Dot(transform.forward, dockDirection);
-
-            if (dot >= 0.99f) break;
-
-            yield return null;
+            ResetAfterArrival();
         }
-        OnStopped?.Invoke();
-        ResetAfterArrival();
     }
+
     public void ResetAfterArrival()
     {
-        arrived = false;
-        hasStopped = false;
-        GameManager.instance.isPlaying = true;
         speed = initialSpeed;
+        playerState.SetState(PlayerStateType.Moving);
     }
-    public void BeginStop(Transform dock)
+    #endregion
+    public void RecolectFish()
     {
-        speed = 0;
-        arrived = true;
-        currentDock = dock;
-        rotateAfterStop = true;
-        hasFish = false;
-        GameManager.instance.isPlaying = false;
-    }
-    public void CrashFreeMode()
-    {
-        if (GameManager.instance.gameMode == Mode.FreeTime) OnCrashed?.Invoke();
+        hasFish= true;
+        playerEvents.FishRecolected();
     }
 }

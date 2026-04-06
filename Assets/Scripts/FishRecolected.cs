@@ -13,8 +13,7 @@ public class FishRecolected : MonoBehaviour
             PlayerMovement playerRef = other.GetComponent<PlayerMovement>();
             if (playerRef != null)
             {
-                playerRef.hasFish = true;
-                playerRef.OnRecolectedFish?.Invoke();
+                playerRef.RecolectFish();;
                 Recolected();
                 Debug.Log("Choco con pex");
             }

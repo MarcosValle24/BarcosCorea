@@ -103,6 +103,9 @@ GameObject:
   - component: {fileID: 4896595019063506083}
   - component: {fileID: 729735570794861647}
   - component: {fileID: 5169655392865678664}
+  - component: {fileID: 3188186605944756977}
+  - component: {fileID: 3078256308712347889}
+  - component: {fileID: 3501606783280595390}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -168,94 +171,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   speed: 2
   initialSpeed: 0
-  rotationSpeed: 0.5
   stopSpeed: 0.8
-  controller:
-    m_Name: Controller
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: a4acd6be-9bf8-4525-b87e-8136fc3b4376
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 1D Axis
-      m_Id: 30d9da93-3270-4af8-beab-5f88774839c0
-      m_Path: 1DAxis
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Controller
-      m_Flags: 4
-    - m_Name: negative
-      m_Id: 61fc2939-1fd5-4421-ad52-60e903406fb5
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Controller
-      m_Flags: 8
-    - m_Name: positive
-      m_Id: bee42017-7c85-4562-b88d-230bf5c02b0f
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Controller
-      m_Flags: 8
-    m_Flags: 0
-  touchScreen:
-    m_Name: Touch Screen
-    m_Type: 0
-    m_ExpectedControlType: Vector2
-    m_Id: 9229a5e3-5066-41f7-9a14-458228ffcc65
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: d82d74ed-03b9-4de2-bdbc-cf0374ec6e88
-      m_Path: <Touchscreen>/primaryTouch/position
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Touch Screen
-      m_Flags: 0
-    - m_Name: 
-      m_Id: f132fd4b-fa1f-440b-9d37-a01d81a7ce7e
-      m_Path: <Mouse>/position
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Touch Screen
-      m_Flags: 0
-    m_Flags: 0
-  click:
-    m_Name: Click
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: a5de08a2-0d7d-4beb-91e0-2a30b7e9dff6
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: e0946a02-9f98-43bb-b0e3-537cf5dbe1c2
-      m_Path: <Mouse>/leftButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Click
-      m_Flags: 0
-    m_Flags: 0
-  hasStopped: 0
-  hasFish: 0
-  OnStopped:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCrashed:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRecolectedFish:
-    m_PersistentCalls:
-      m_Calls: []
+  rotationSpeed: 0
+  playerInput: {fileID: 3078256308712347889}
+  playerState: {fileID: 3501606783280595390}
+  playerEvents: {fileID: 3188186605944756977}
 --- !u!65 &5169655392865678664
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -277,6 +197,115 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.7299995, y: 5.5914083, z: 0.19999999}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3188186605944756977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2592185037342288485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586f2918b56eb434981ac2f02602ad29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerEvents
+  OnArrivedNoFish:
+    m_PersistentCalls:
+      m_Calls: []
+  OnArrivedWithFish:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrashed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFishRecolected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetPos:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3078256308712347889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2592185037342288485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad20479951830843a3a8507409e565d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
+  controller:
+    m_Name: Controller
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: f15f44b1-c9fe-4dc3-a43c-4fec600d1b98
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 5b5995ec-3612-4a64-a066-1227afe625f6
+      m_Path: <Pointer>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Controller
+      m_Flags: 0
+    m_Flags: 0
+  touchScreen:
+    m_Name: Touch Screen
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 21f29f7d-7c3e-4690-951a-502b1f076035
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 7b6f7c9d-06b0-4907-a9d1-078d9a379bed
+      m_Path: <Touchscreen>/Press
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Screen
+      m_Flags: 0
+    m_Flags: 0
+  click:
+    m_Name: Click
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 3711c759-481a-4fef-bb1e-65492da47997
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9386a71d-31c5-4f8c-80df-f8f34f8def33
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Click
+      m_Flags: 0
+    m_Flags: 0
+  rotationSpeed: 1
+--- !u!114 &3501606783280595390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2592185037342288485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f095c8a8b1c9641bda2ef0bc0f9d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerState
+  OnPlayerStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2764458494736966601
 GameObject:
   m_ObjectHideFlags: 0

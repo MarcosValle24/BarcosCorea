@@ -1704,7 +1704,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d55148d91f031449075e0fa5a25e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FreeGameMode
-  player: {fileID: 973189715}
+  playerEvents: {fileID: 973189718}
+  playerMovement: {fileID: 973189715}
   uiHandler: {fileID: 1873539764}
   dockManager: {fileID: 340235223}
   fishManager: {fileID: 871613482}
@@ -4332,7 +4333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2076741d19c06b24782da31dabc6cb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DockScript
-  arrow: {fileID: 0}
+  arrow: {fileID: 1117433143}
 --- !u!82 &620785632
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5592,7 +5593,7 @@ GameObject:
   - component: {fileID: 835309381}
   - component: {fileID: 835309382}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6021,6 +6022,7 @@ MonoBehaviour:
   FishPrefab: {fileID: 3860792600617623905, guid: 2df24e506a0bab645938134a8fa4108b, type: 3}
   FishRef: {fileID: 0}
   fishToSpawn: 1
+  fishes: []
 --- !u!1 &893554844
 GameObject:
   m_ObjectHideFlags: 0
@@ -6335,6 +6337,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3654ace9b83e6d14a82a8763817b2657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+--- !u!114 &973189717 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3078256308712347889, guid: 7ed7d5fda10a94e46b3e4d1a55a545b4, type: 3}
+  m_PrefabInstance: {fileID: 7123210598914030969}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad20479951830843a3a8507409e565d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
+--- !u!114 &973189718 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3188186605944756977, guid: 7ed7d5fda10a94e46b3e4d1a55a545b4, type: 3}
+  m_PrefabInstance: {fileID: 7123210598914030969}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586f2918b56eb434981ac2f02602ad29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerEvents
 --- !u!1 &993390994
 GameObject:
   m_ObjectHideFlags: 0
@@ -6593,18 +6617,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   gameMode: 0
-  gameResult: 0
-  isPlaying: 0
-  StartFreeTimeGame:
+  gameResult: 3
+  OnGameModeChanged:
     m_PersistentCalls:
       m_Calls: []
-  StartTimeGame:
-    m_PersistentCalls:
-      m_Calls: []
-  FinishGame:
-    m_PersistentCalls:
-      m_Calls: []
-  LoseFreeMode:
+  OnGameResultChanged:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1017019068
@@ -6813,7 +6830,7 @@ GameObject:
   - component: {fileID: 1117433144}
   - component: {fileID: 1117433145}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8720,7 +8737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1936039ef96b8544fb25b4d89d08d34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  playerAngleMovement: {fileID: 973189715}
+  playerAngleMovement: {fileID: 973189717}
 --- !u!114 &1398229183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16109,7 +16126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2076741d19c06b24782da31dabc6cb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DcokScript
-  arrow: {fileID: 0}
+  arrow: {fileID: 835309380}
 --- !u!54 &1819785225
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23282,6 +23299,14 @@ PrefabInstance:
     - target: {fileID: 135510584739279320, guid: 7ed7d5fda10a94e46b3e4d1a55a545b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 729735570794861647, guid: 7ed7d5fda10a94e46b3e4d1a55a545b4, type: 3}
+      propertyPath: stopSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 729735570794861647, guid: 7ed7d5fda10a94e46b3e4d1a55a545b4, type: 3}
+      propertyPath: rotationSpeed
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2592185037342288485, guid: 7ed7d5fda10a94e46b3e4d1a55a545b4, type: 3}
       propertyPath: m_Name

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VectorGraphics;
 using UnityEngine;
@@ -10,12 +11,12 @@ public enum GameResult
     Lose,
     Pause,
     Playing,
-    Menus
 }
 public enum Mode
 {
     FreeTime,
-    TimeMode
+    TimeMode,
+    Menus
 }
 public class GameManager : MonoBehaviour
 {
@@ -23,13 +24,6 @@ public class GameManager : MonoBehaviour
 
     public Mode gameMode;
     public GameResult gameResult;
-    public bool isPlaying = false;
-
-    public UnityEvent StartFreeTimeGame;
-    public UnityEvent StartTimeGame;
-    public UnityEvent FinishGame;
-    public UnityEvent LoseFreeMode;
-
 
     void Awake()
     {
@@ -43,48 +37,50 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); 
     }
 
-    public void BeginPlay()
-    {
-        isPlaying = true;
-    }
+    public UnityEvent <Mode> OnGameModeChanged;
+    public UnityEvent <GameResult> OnGameResultChanged;
 
+    public void StartGameMode(Mode mode)
+    {
+        gameMode = mode;
+        gameResult = GameResult.Playing;
+
+        OnGameModeChanged?.Invoke(gameMode); 
+        OnGameResultChanged?.Invoke(gameResult);
+    }
+    public void SetResult(GameResult result)
+    {
+        gameResult = result;
+        OnGameResultChanged?.Invoke(gameResult);    
+    }
     public void GameOver()
     {
-        isPlaying = false;
         gameResult = GameResult.Lose;
     }
     public void Pause(bool isPaused) 
     {
         if (isPaused)
         {
-            isPlaying = false;
-            gameResult=GameResult.Pause;
+            SetResult(GameResult.Pause);
         }
         else
-        { 
-            isPlaying = true;
-            gameResult = GameResult.Playing;
+        {
+            SetResult(GameResult.Playing);
         }
     }
     public void OpenFreeGameMode()
     {
-        gameMode = Mode.FreeTime;
-        gameResult = GameResult.Playing; 
-        StartFreeTimeGame?.Invoke();
-        BeginPlay();
+        StartGameMode(Mode.FreeTime);
         SceneManager.LoadScene("FreeMode");
     }
     public void OpenTimeGameMode()
     {
-        gameMode = Mode.TimeMode;
-        gameResult = GameResult.Playing;
-        StartTimeGame?.Invoke();
-        BeginPlay();
+        StartGameMode(Mode.TimeMode);
         SceneManager.LoadScene("TimeMode");
     }
     public void OpenMainMenu()
     {
-        gameResult = GameResult.Menus;
+        StartGameMode(Mode.Menus);
         SceneManager.LoadScene("Menu");
     }
 }

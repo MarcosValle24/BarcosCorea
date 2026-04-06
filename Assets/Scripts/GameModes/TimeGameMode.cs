@@ -1,51 +1,51 @@
+using System.Collections;
 using UnityEngine;
 
 public class TimeGameMode : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement player;
+    [SerializeField] private PlayerEvents playerEvents;
+    [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private UIHandlerTimeMode uiHandler;
     [SerializeField] private DockManager dockManager;
     [SerializeField] private float maxTime;
+    [SerializeField] private bool playerArrived;
     private float timer = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SetValues();
-        player.OnStopped.AddListener(HandlePlayerStopped);
-        GameManager.instance.gameResult = GameResult.Playing;
-        GameManager.instance.gameMode = Mode.TimeMode;
-        GameManager.instance.isPlaying = true;
-        dockManager.ActivateRandomDock();
+        ResetValues();
+        playerEvents.OnStopped.AddListener(PlayerArrived);
+        playerEvents.OnCrashed.AddListener(OnPlayerCrashed);
+        GameManager.instance.OnGameResultChanged.AddListener(OnGameResultChanged);
     }
-    void SetValues()
+    void ResetValues()
     {
+        playerMovement.RestartPosition();
         timer = maxTime;
+        uiHandler.RemoveAllPanels();
+        dockManager.DeactivateDocks();
+        dockManager.ActivateRandomDock();
+        playerArrived = false;
+        GameManager.instance.SetResult(GameResult.Playing);
     }
-    void HandlePlayerStopped()
+    void PlayerArrived()
     {
-        uiHandler.ShowPanel(GameResult.Win);
-        GameManager.instance.gameResult = GameResult.Win;
+        playerArrived = true;
+        GameManager.instance.SetResult(GameResult.Win);
     }
-    // Update is called once per frame
+    void Lose()
+    {
+        GameManager.instance.SetResult(GameResult.Lose);
+    }
     void Update()
     {
-        if (GameManager.instance.gameResult != GameResult.Playing || !GameManager.instance.isPlaying) return;
+        if (GameManager.instance.gameResult != GameResult.Playing)
+            return;
 
-        if (GameManager.instance.gameMode == Mode.TimeMode && !player.arrived)
-        {
-            timer -= Time.deltaTime;
-            int minutes = Mathf.FloorToInt(timer / 60f);
-            int seconds = Mathf.FloorToInt(timer % 60f);
+        if (playerArrived == true)
+            return;
 
-            uiHandler.UpdateTimer(minutes.ToString("00") + ":" + seconds.ToString("00"));
-
-            if (timer <= 0)
-            {
-                uiHandler.ShowPanel(GameResult.Lose);
-                GameManager.instance.gameResult = GameResult.Lose;
-            }
-        }
-        
+        Clock();    
     }
     public void QuitToMainMenu()
     {
@@ -53,11 +53,34 @@ public class TimeGameMode : MonoBehaviour
     }
     public void RestartGame()
     {
-        SetValues();
-        player.RestartPosition();
-        dockManager.DeactivateDocks();
-        dockManager.ActivateRandomDock();
-        uiHandler.RemoveAllPanels();
-        GameManager.instance.gameResult = GameResult.Playing;
+        ResetValues();
+    }
+    void OnGameResultChanged(GameResult result)
+    {
+        uiHandler.ShowPanel(result);
+    }
+    private void Clock()
+    {
+        timer -= Time.deltaTime;
+        int minutes = Mathf.FloorToInt(timer / 60f);
+        int seconds = Mathf.FloorToInt(timer % 60f);
+
+        uiHandler.UpdateTimer(minutes.ToString("00") + ":" + seconds.ToString("00"));
+
+        if (timer <= 0)
+        {
+            uiHandler.ShowPanel(GameResult.Lose);
+            GameManager.instance.SetResult(GameResult.Lose);
+        }
+    }
+    private void OnPlayerCrashed()
+    {
+        StartCoroutine(RecoverFromCrash());
+    }
+    IEnumerator RecoverFromCrash()
+    {
+        yield return new WaitForSeconds(.3f);
+
+        playerMovement.RecoverFromCrash();
     }
 }

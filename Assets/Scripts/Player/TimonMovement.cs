@@ -4,14 +4,7 @@ using UnityEngine.UI;
 
 public class TimonMovement : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement playerAngleMovement;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    [SerializeField] private PlayerInput playerAngleMovement;
     void Update()
     {
         MoveTimon();
@@ -20,13 +13,12 @@ public class TimonMovement : MonoBehaviour
     {
         if (playerAngleMovement == null || !playerAngleMovement.isActiveAndEnabled) return;
 
-        if (playerAngleMovement.GetisPressed == true)
+        if (playerAngleMovement.GetIsPressed == true)
         {
             float angle = playerAngleMovement.GetAngle;
-            float playerRotationSpeed = playerAngleMovement.rotationSpeed;
+            float playerRotationSpeed = playerAngleMovement.GetRotationSpeed;
             //transform.localRotation = Quaternion.Euler(0, 0, -targetAngle);
-            transform.Rotate(Vector3.forward * angle * playerRotationSpeed);
+            transform.Rotate(Vector3.forward * playerAngleMovement.GetAngle * playerAngleMovement.GetRotationSpeed);
         }
-
     }
 }
