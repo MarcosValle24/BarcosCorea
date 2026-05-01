@@ -9,7 +9,6 @@ public enum GameResult
 {
     Win,
     Lose,
-    Pause,
     Playing,
 }
 public enum Mode
@@ -59,14 +58,14 @@ public class GameManager : MonoBehaviour
     }
     public void Pause(bool isPaused) 
     {
-        if (isPaused)
-        {
-            SetResult(GameResult.Pause);
-        }
-        else
-        {
-            SetResult(GameResult.Playing);
-        }
+        //if (isPaused)
+        //{
+        //    SetResult(GameResult.Pause);
+        //}
+        //else
+        //{
+        //    SetResult(GameResult.Playing);
+        //}
     }
     public void OpenFreeGameMode()
     {

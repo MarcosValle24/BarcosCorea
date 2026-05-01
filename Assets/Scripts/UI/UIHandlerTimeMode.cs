@@ -7,7 +7,6 @@ public class UIHandlerTimeMode : MonoBehaviour
     [SerializeField] public TMP_Text timerText;
     [SerializeField] private GameObject panelWin;
     [SerializeField] private GameObject panelLose;
-    [SerializeField] private GameObject panelPause;
 
     private void Start()
     {
@@ -24,14 +23,13 @@ public class UIHandlerTimeMode : MonoBehaviour
     public void RemoveAllPanels()
     {
         panelLose.SetActive(false);
-        panelPause.SetActive(false);
         panelWin.SetActive(false);
         GameManager.instance.Pause(false);
     }
     public void ShowPanel(GameResult result)
     {
         panelLose.SetActive(false);
-        panelPause.SetActive(false);
+
         panelWin.SetActive(false);
 
         switch (result)
@@ -39,20 +37,12 @@ public class UIHandlerTimeMode : MonoBehaviour
             case GameResult.Win:
                 panelWin.SetActive(true);
                 break;
-            case GameResult.Pause:
-                panelPause.SetActive(true);
-                break;
             case GameResult.Lose:
                 panelLose.SetActive(true);
                 break;
         }
     }
 
-    public void ShowPausePanel()
-    {
-        ShowPanel(GameResult.Pause);
-        GameManager.instance.Pause(true);
-    }
     public void ShowLosePanel()
     {
         ShowPanel(GameResult.Lose);

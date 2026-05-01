@@ -30,77 +30,7 @@ public class PlayerInput : MonoBehaviour
         touchScreen.Disable();
         click.Disable();
     }
-    //    private void Update()
-    //    {
-    //        if (UsingTouch()) TouchInput();
-    //        else MouseInput();
-    //        float value = controller.ReadValue<float>();
-    //        rotationMove = value * rotationSpeed;
-    //    }
-    //    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    //    void TouchInput()
-    //    {
-    //        if (Touchscreen.current == null) return;
-
-    //        var touch = Touchscreen.current.primaryTouch;
-
-    //        if (!touch.press.isPressed)
-    //        {
-    //            isPressed = false;
-    //            return;
-    //        }
-
-    //        Vector2 pos = touch.position.ReadValue();
-
-    //        if (!isPressed)
-    //        {
-    //            centerTouch = pos;
-    //            firstTouch = pos - centerTouch;
-    //            isPressed = true;
-    //            return;
-    //        }
-
-    //        Vector2 currentVector = pos - centerTouch;
-
-    //        angle = Vector2.SignedAngle(firstTouch, currentVector);
-
-    //        transform.Rotate(Vector3.up * angle * rotationSpeed);
-
-    //        firstTouch = currentVector;
-    //    }
-    //    void MouseInput()
-    //    {
-    //        if (Mouse.current == null) return;
-
-    //        if (!click.IsPressed())
-    //        {
-    //            isPressed = false;
-    //            return;
-    //        }
-
-    //        Vector2 pos = Mouse.current.position.ReadValue();
-
-    //        if (!isPressed)
-    //        {
-    //            centerTouch = pos;
-    //            firstTouch = pos - centerTouch;
-    //            isPressed = true;
-    //            return;
-    //        }
-
-    //        Vector2 currentVector = pos - centerTouch;
-
-    //        angle = Vector2.SignedAngle(firstTouch, currentVector);
-
-    //        transform.Rotate(Vector3.up * angle * rotationSpeed);
-
-    //        firstTouch = currentVector;
-    //    }
-    //    private bool UsingTouch()
-    //    {
-    //        return Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed;
-    //    }
-    //}
+   
     private void Update()
     {
         if (UsingTouch())
@@ -127,7 +57,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        Vector2 currentVector = pos - centerTouch;
+        Vector2 currentVector = new Vector2(pos.x - centerTouch.x, centerTouch.y);
         angle = Vector2.SignedAngle(firstTouch, currentVector);
         firstTouch = currentVector;
     }
@@ -150,7 +80,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        Vector2 currentVector = pos - centerTouch;
+        Vector2 currentVector = new Vector2(pos.x - centerTouch.x, centerTouch.y);
         angle = Vector2.SignedAngle(firstTouch, currentVector);
         firstTouch = currentVector;
     }
