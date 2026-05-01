@@ -80,7 +80,17 @@ public class GameManager : MonoBehaviour
     }
     public void OpenMainMenu()
     {
-        StartGameMode(Mode.Menus);
+        //StartGameMode(Mode.Menus);
+        SceneManager.LoadScene("Menu");
+    }
+    public void MenuChoserFreeGameMode()
+    {
+        gameMode = Mode.FreeTime;
+        SceneManager.LoadScene("Menu");
+    }
+    public void MenuChoserTimeGameMode()
+    {
+        gameMode = Mode.TimeMode;
         SceneManager.LoadScene("Menu");
     }
 }

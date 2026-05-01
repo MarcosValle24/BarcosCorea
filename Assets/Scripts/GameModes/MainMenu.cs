@@ -1,33 +1,46 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.Rendering.DebugUI;
 
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Animator transitionAnimator;
-    
-    public void ChangeScene(bool time)
+    [SerializeField] private CanvasGroup faderPanel;
+    [SerializeField] private float fadeDuration = 1f;
+
+    private void Start()
     {
-      StartCoroutine(OpenGameMode(time));
+        faderPanel.alpha = 0f;
+        faderPanel.DOFade(1f, fadeDuration);
+    }
+    public void ChangeScene()
+    {
+      StartCoroutine(OpenGameMode());
        
     }
  
 
-    IEnumerator OpenGameMode(bool time)
+    IEnumerator OpenGameMode()
     {
-        if (time)
+        yield return faderPanel.DOFade(0f, fadeDuration).SetEase(Ease.InOutQuad).WaitForCompletion();
+
+        if (GameManager.instance.gameMode == Mode.TimeMode)
         {
-            transitionAnimator.SetTrigger("Fade");
-            yield return new WaitForSeconds(2f);
+            //transitionAnimator.SetTrigger("Fade");
+            //yield return new WaitForSeconds(2f);
             GameManager.instance.OpenTimeGameMode();
         }
         else
         {
-            transitionAnimator.SetTrigger("Fade");
-            yield return new WaitForSeconds(2f);
+            //transitionAnimator.SetTrigger("Fade");
+            //yield return new WaitForSeconds(2f);
             GameManager.instance.OpenFreeGameMode();
             
         }
+        faderPanel.blocksRaycasts = true;
     }
     
 }
