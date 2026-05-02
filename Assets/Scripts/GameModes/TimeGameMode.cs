@@ -7,6 +7,7 @@ public class TimeGameMode : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private UIHandlerTimeMode uiHandler;
     [SerializeField] private DockManager dockManager;
+    [SerializeField] private GameModeFader fader;
     [SerializeField] private float maxTime;
     [SerializeField] private bool playerArrived;
     private float timer = 0;
@@ -21,6 +22,7 @@ public class TimeGameMode : MonoBehaviour
     void ResetValues()
     {
         playerMovement.RestartPosition();
+        fader.FadeOut();
         timer = maxTime;
         uiHandler.RemoveAllPanels();
         dockManager.DeactivateDocks();
@@ -32,10 +34,13 @@ public class TimeGameMode : MonoBehaviour
     {
         playerArrived = true;
         GameManager.instance.SetResult(GameResult.Win);
+        fader.FadeIn();
+
     }
     void Lose()
     {
         GameManager.instance.SetResult(GameResult.Lose);
+        fader.FadeIn();
     }
     void Update()
     {

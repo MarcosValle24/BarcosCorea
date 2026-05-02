@@ -12,6 +12,7 @@ public class FreeGameMode : MonoBehaviour
     [SerializeField] private DockManager dockManager;
     [SerializeField] private FishManager fishManager;
     [SerializeField] private Scoreboard scoreboard;
+    [SerializeField] private GameModeFader fader;
     [SerializeField] public int fishRecolected;
     [SerializeField] public string playerName;
     void Start()
@@ -21,6 +22,7 @@ public class FreeGameMode : MonoBehaviour
         playerEvents.OnFishRecolected.AddListener(RecolectedFish);
         scoreboard.OnEnterScore.AddListener(uiHandler.ShowScorePanel);
         uiHandler.ShowFishGameUI(fishRecolected.ToString());
+        fader.FadeOut();
         SpawnFish();
     }
     private void OnDisable()
@@ -41,6 +43,7 @@ public class FreeGameMode : MonoBehaviour
         playerMovement.RestartPosition();
         dockManager.DeactivateDocks();
         uiHandler.RemoveAllPanels();
+        fader.FadeOut();
         SpawnFish();
         GameManager.instance.gameResult = GameResult.Playing;
     }
@@ -64,9 +67,8 @@ public class FreeGameMode : MonoBehaviour
     void Lose()
     {
         RemoveFishes();
-        uiHandler.EnterScorePanel();
-        uiHandler.ShowFishRecolected(fishRecolected.ToString());
-        GameManager.instance.SetResult(GameResult.Lose);
+        StartCoroutine(WaitAfterCrash());
+        fader.FadeIn();
     }
     void RecolectedFish()
     {
@@ -76,5 +78,12 @@ public class FreeGameMode : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         dockManager.DeactivateDocks();
+    }
+    IEnumerator WaitAfterCrash()
+    {
+        yield return new WaitForSeconds(1f);
+        uiHandler.EnterScorePanel();
+        uiHandler.ShowFishRecolected(fishRecolected.ToString());
+        GameManager.instance.SetResult(GameResult.Lose);
     }
 }

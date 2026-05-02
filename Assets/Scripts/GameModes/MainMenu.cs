@@ -7,22 +7,29 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private Animator transitionAnimator;
+   // [SerializeField] private Animator transitionAnimator;
     [SerializeField] private CanvasGroup faderPanel;
     [SerializeField] private float fadeDuration = 1f;
 
     private void Start()
     {
-        faderPanel.alpha = 0f;
-        faderPanel.DOFade(1f, fadeDuration);
+        FadeIn();
     }
     public void ChangeScene()
     {
       StartCoroutine(OpenGameMode());
        
     }
- 
-
+    public void FadeIn()
+    {
+        faderPanel.alpha = 0f;
+        faderPanel.DOFade(1f, fadeDuration);
+    }
+    public void FadeOut()
+    {
+        faderPanel.alpha = 1f;
+        faderPanel.DOFade(0f, fadeDuration);
+    }
     IEnumerator OpenGameMode()
     {
         yield return faderPanel.DOFade(0f, fadeDuration).SetEase(Ease.InOutQuad).WaitForCompletion();
