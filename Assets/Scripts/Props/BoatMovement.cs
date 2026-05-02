@@ -7,11 +7,14 @@ public class BoatMovement : MonoBehaviour
     private Transform startPos;
     private BoxCollider boxCollider;
     private ParticleSystem particles;
+    private AudioSource audiocrash;
+
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
         image = GetComponentInChildren<SpriteRenderer>();
         particles = GetComponentInChildren<ParticleSystem>();
+        audiocrash = GetComponentInChildren<AudioSource>();
         Animation();
     }
 
@@ -29,6 +32,7 @@ public class BoatMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             particles.Play();
+            audiocrash.Play();
             PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
 
             if (player != null)
