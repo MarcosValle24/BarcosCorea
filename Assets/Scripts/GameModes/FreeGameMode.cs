@@ -1,3 +1,4 @@
+using DG.Tweening;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ public class FreeGameMode : MonoBehaviour
     [SerializeField] private DockManager dockManager;
     [SerializeField] private FishManager fishManager;
     [SerializeField] private Scoreboard scoreboard;
-    [SerializeField] private GameModeFader fader;
+    [SerializeField] private CanvasGroup fader;
     [SerializeField] public int fishRecolected;
     [SerializeField] public string playerName;
     void Start()
@@ -22,16 +23,17 @@ public class FreeGameMode : MonoBehaviour
         playerEvents.OnFishRecolected.AddListener(RecolectedFish);
         scoreboard.OnEnterScore.AddListener(uiHandler.ShowScorePanel);
         uiHandler.ShowFishGameUI(fishRecolected.ToString());
-        fader.FadeOut();
         SpawnFish();
+        OnGameStart();
     }
-    private void OnDisable()
+    void OnGameStart()
     {
-
+        StartCoroutine(FadeIn());
     }
     void SetValues()
     {
         fishRecolected = 0;
+        uiHandler.ShowFishGameUI(fishRecolected.ToString());
     }
     public void QuitToMainMenu()
     {
@@ -39,13 +41,7 @@ public class FreeGameMode : MonoBehaviour
     }
     public void RestartGame()
     {
-        SetValues();
-        playerMovement.RestartPosition();
-        dockManager.DeactivateDocks();
-        uiHandler.RemoveAllPanels();
-        fader.FadeOut();
-        SpawnFish();
-        GameManager.instance.gameResult = GameResult.Playing;
+        StartCoroutine(FadeOut());
     }
     void SpawnFish()
     {
@@ -68,7 +64,6 @@ public class FreeGameMode : MonoBehaviour
     {
         RemoveFishes();
         StartCoroutine(WaitAfterCrash());
-        fader.FadeIn();
     }
     void RecolectedFish()
     {
@@ -85,5 +80,28 @@ public class FreeGameMode : MonoBehaviour
         uiHandler.EnterScorePanel();
         uiHandler.ShowFishRecolected(fishRecolected.ToString());
         GameManager.instance.SetResult(GameResult.Lose);
+    }
+    IEnumerator FadeIn()
+    {
+        SetValues();
+        uiHandler.ShowFishRecolected(fishRecolected.ToString());
+        playerMovement.RestartPosition();
+        dockManager.DeactivateDocks();
+        uiHandler.RemoveAllPanels();
+        dockManager.DeactivateDocks();
+        SpawnFish();
+        yield return fader.DOFade(0f, 1f).SetEase(Ease.InOutQuad).WaitForCompletion();
+        GameManager.instance.gameResult = GameResult.Playing;
+    }
+    IEnumerator FadeOut()
+    {
+        yield return fader.DOFade(1f, 0f).SetEase(Ease.InOutQuad).WaitForCompletion();
+        OnGameStart();
+    }
+    IEnumerator FadeToQuitMainMenu()
+    {
+        yield return fader.DOFade(1f, 0f).SetEase(Ease.InOutQuad).WaitForCompletion();
+        GameManager.instance.OpenMainMenu();
+
     }
 }

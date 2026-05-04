@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -7,40 +8,34 @@ public class TimeGameMode : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private UIHandlerTimeMode uiHandler;
     [SerializeField] private DockManager dockManager;
-    [SerializeField] private GameModeFader fader;
+    [SerializeField] private CanvasGroup fader;
     [SerializeField] private float maxTime;
     [SerializeField] private bool playerArrived;
     private float timer = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ResetValues();
         playerEvents.OnStopped.AddListener(PlayerArrived);
         playerEvents.OnCrashed.AddListener(OnPlayerCrashed);
         GameManager.instance.OnGameResultChanged.AddListener(OnGameResultChanged);
+        ResetValues();
     }
     void ResetValues()
     {
-        playerMovement.RestartPosition();
-        fader.FadeOut();
-        timer = maxTime;
-        uiHandler.RemoveAllPanels();
-        dockManager.DeactivateDocks();
-        dockManager.ActivateRandomDock();
-        playerArrived = false;
-        GameManager.instance.SetResult(GameResult.Playing);
+        //StopAllCoroutines();
+        StartCoroutine(FadeIn());
     }
     void PlayerArrived()
     {
         playerArrived = true;
         GameManager.instance.SetResult(GameResult.Win);
-        fader.FadeIn();
+        playerMovement.Stop();
 
     }
     void Lose()
     {
         GameManager.instance.SetResult(GameResult.Lose);
-        fader.FadeIn();
+        playerMovement.Stop();
     }
     void Update()
     {
@@ -54,11 +49,11 @@ public class TimeGameMode : MonoBehaviour
     }
     public void QuitToMainMenu()
     {
-        GameManager.instance.OpenMainMenu();
+        StartCoroutine(FadeToQuitMainMenu());
     }
     public void RestartGame()
     {
-        ResetValues();
+        StartCoroutine(FadeOut());
     }
     void OnGameResultChanged(GameResult result)
     {
@@ -87,5 +82,29 @@ public class TimeGameMode : MonoBehaviour
         yield return new WaitForSeconds(.3f);
 
         playerMovement.RecoverFromCrash();
+    }
+    IEnumerator FadeIn()
+    {
+        timer = maxTime;
+        playerArrived = true;
+        playerMovement.RestartPosition();
+        uiHandler.RemoveAllPanels();
+        yield return fader.DOFade(0f, 1f).SetEase(Ease.InOutQuad).WaitForCompletion();
+        playerArrived = false;
+        dockManager.DeactivateDocks();
+        dockManager.ActivateRandomDock();
+        GameManager.instance.SetResult(GameResult.Playing);
+    }
+
+    IEnumerator FadeOut()
+    {
+        yield return fader.DOFade(1f, 0f).SetEase(Ease.InOutQuad).WaitForCompletion();
+        ResetValues();
+    }
+    IEnumerator FadeToQuitMainMenu()
+    {
+        yield return fader.DOFade(1f, 0f).SetEase(Ease.InOutQuad).WaitForCompletion();
+        GameManager.instance.OpenMainMenu();
+
     }
 }

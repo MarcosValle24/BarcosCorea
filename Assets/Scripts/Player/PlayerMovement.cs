@@ -40,17 +40,17 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Start()
     {
-        OnGameStart();
+        //OnGameStart();
     }
 
     private void OnGameStart()
     {
-        playerState.ResetState();
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
         speed = initialSpeed;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        transform.position = initialPosition;
-        transform.rotation = initialRotation;
+        playerState.ResetState();
     }
     void Update()
     {
@@ -139,10 +139,17 @@ public class PlayerMovement : MonoBehaviour
     #endregion 
     public void RestartPosition()
     {
+        StartCoroutine(WaitToStartMoving());
+    }
+    IEnumerator WaitToStartMoving()
+    {
+        playerState.SetState(PlayerStateType.Paused);
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+        yield return new WaitForSeconds(1f);
         OnGameStart();
     }
     #region BoatDockRotation
-
     private void Rotate()
     {
         if (currentDock == null) return;
@@ -180,5 +187,11 @@ public class PlayerMovement : MonoBehaviour
     {
         hasFish= true;
         playerEvents.FishRecolected();
+    }
+    public void Stop()
+    {
+        playerState.SetState(PlayerStateType.Paused);
+        rb.angularVelocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
     }
 }

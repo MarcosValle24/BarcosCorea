@@ -56,8 +56,15 @@ public class Scoreboard : MonoBehaviour
         entry.name = playerName;
         entry.score = score;
 
+    
         scoreboard.scores.Add(entry);
+
         SortScoreBoard();
+
+        if (scoreboard.scores.Count > 5)
+        {
+            scoreboard.scores.RemoveAt(scoreboard.scores.Count - 1);
+        }
         ShowScoreBoard();
         SaveScoreboard();
     }

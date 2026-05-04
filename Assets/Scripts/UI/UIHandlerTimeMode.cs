@@ -10,7 +10,7 @@ public class UIHandlerTimeMode : MonoBehaviour
 
     private void Start()
     {
-        RemoveAllPanels();
+        //RemoveAllPanels();
     }
 
     public void UpdateTimer(string text)
