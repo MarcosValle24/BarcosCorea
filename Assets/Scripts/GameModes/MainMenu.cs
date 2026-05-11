@@ -49,5 +49,10 @@ public class MainMenu : MonoBehaviour
         }
         faderPanel.blocksRaycasts = true;
     }
+
+    public void ReturnButton()
+    {
+        GameManager.instance.OpenGameModeChoser();
+    }
     
 }

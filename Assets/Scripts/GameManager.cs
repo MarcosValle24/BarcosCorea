@@ -92,4 +92,8 @@ public class GameManager : MonoBehaviour
         gameMode = Mode.TimeMode;
         SceneManager.LoadScene("Menu");
     }
+    public void OpenGameModeChoser()
+    {
+        SceneManager.LoadScene("GameChoser");
+    }
 }
