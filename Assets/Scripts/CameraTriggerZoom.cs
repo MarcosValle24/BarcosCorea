@@ -10,7 +10,8 @@ public class CameraTriggerZoom : MonoBehaviour
     [SerializeField] private DockScript dockScript;
 
     [SerializeField] private float fovIN = 45f;
-    [SerializeField] private float duration = 1f;
+    [SerializeField] private float durationOut = 1f;
+    [SerializeField] private float durationIn = 1f;
 
     private float fovOUT;
     private Quaternion originRotation;
@@ -30,10 +31,10 @@ public class CameraTriggerZoom : MonoBehaviour
         if (!other.CompareTag("Player") || !dockScript.isActiveAndEnabled) return;
 
         fovTween?.Kill();
-        fovTween = cam.DOFieldOfView(fovIN, duration)
+        fovTween = cam.DOFieldOfView(fovIN, durationIn)
             .SetEase(Ease.InSine);
 
-        lookAtTween = cameraTransform.DOLookAt(player.position,duration).SetEase(Ease.InOutSine);
+        lookAtTween = cameraTransform.DOLookAt(player.position,durationIn).SetEase(Ease.InOutSine);
     }
 
     private void OnTriggerExit(Collider other)
@@ -41,11 +42,11 @@ public class CameraTriggerZoom : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         fovTween?.Kill();
-        fovTween = cam.DOFieldOfView(fovOUT, duration)
+        fovTween = cam.DOFieldOfView(fovOUT, durationOut)
             .SetEase(Ease.InSine);
 
 
-        cameraTransform.DORotateQuaternion(originRotation, duration)
+        cameraTransform.DORotateQuaternion(originRotation, durationOut)
             .SetEase(Ease.InSine);
     }
 

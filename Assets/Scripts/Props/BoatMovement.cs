@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,12 +13,17 @@ public class BoatMovement : MonoBehaviour
     private ParticleSystem particles;
     private AudioSource audiocrash;
     private Rigidbody rb;
-    [SerializeField]private float speed = 5f;
-    
-    private Vector3 direction = Vector3.right;
+    [SerializeField] private float speed = 5f;
+
+
+    [SerializeField] private float verticalVel = 0.5f;
+    [SerializeField] private float horizontalVel = 0.5f;
+
+    Vector3 direction;
     private void FixedUpdate()
     {
-        rb.linearVelocity = direction * speed * Time.deltaTime;
+        direction = new Vector3(horizontalVel, 0, verticalVel).normalized;
+        rb.linearVelocity = direction * speed;
     }
     private void Start()
     {
@@ -51,26 +57,36 @@ public class BoatMovement : MonoBehaviour
                 player.Crash();
             }
         }
+        if (collision.gameObject.CompareTag("Boat"))
+        {
+            horizontalVel *= -1;
+            verticalVel *= -1;
+            direction.y = 0;
+            direction.Normalize();
+            Debug.Log("choco con bote");
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("BoatWall")) return;
+        if (other.CompareTag("BoatWall")){
 
-        BoatWall wall = other.GetComponent<BoatWall>();
-        if(wall == null) return;
+            BoatWall wall = other.GetComponent<BoatWall>();
+            if (wall == null) return;
 
-        switch (wall.type)
-        {
-            case WallType.RIGHT: 
-            case WallType.LEFT:
-                direction.x *= -1;
-                break;
-            case WallType.UP:
-            case WallType.DOWN:
-                direction.z *= -1;
-                break;
+            switch (wall.type)
+            {
+                case WallType.RIGHT:
+                case WallType.LEFT:
+                    horizontalVel *= -1;
+                    break;
+                case WallType.UP:
+                case WallType.DOWN:
+                    verticalVel *= -1;
+                    break;
+            }
+            direction.y = 0;
+            direction.Normalize();
         }
-        direction.y = 0;
-        direction.Normalize();
     }
+   
 }
