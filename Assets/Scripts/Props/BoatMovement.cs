@@ -1,6 +1,9 @@
 using DG.Tweening;
+using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class BoatMovement : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer image;
@@ -8,9 +11,17 @@ public class BoatMovement : MonoBehaviour
     private BoxCollider boxCollider;
     private ParticleSystem particles;
     private AudioSource audiocrash;
-
+    private Rigidbody rb;
+    [SerializeField]private float speed = 5f;
+    
+    private Vector3 direction = Vector3.right;
+    private void FixedUpdate()
+    {
+        rb.linearVelocity = direction * speed * Time.deltaTime;
+    }
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
         image = GetComponentInChildren<SpriteRenderer>();
         particles = GetComponentInChildren<ParticleSystem>();
@@ -40,5 +51,26 @@ public class BoatMovement : MonoBehaviour
                 player.Crash();
             }
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("BoatWall")) return;
+
+        BoatWall wall = other.GetComponent<BoatWall>();
+        if(wall == null) return;
+
+        switch (wall.type)
+        {
+            case WallType.RIGHT: 
+            case WallType.LEFT:
+                direction.x *= -1;
+                break;
+            case WallType.UP:
+            case WallType.DOWN:
+                direction.z *= -1;
+                break;
+        }
+        direction.y = 0;
+        direction.Normalize();
     }
 }
