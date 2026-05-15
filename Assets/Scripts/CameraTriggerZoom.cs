@@ -25,7 +25,7 @@ public class CameraTriggerZoom : MonoBehaviour
         fovOUT = cam.fieldOfView;
         originRotation = cameraTransform.rotation;
     }
-
+   // Vector3 followPlayer = Vector3.Lerp()
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player") || !dockScript.isActiveAndEnabled) return;
@@ -35,6 +35,7 @@ public class CameraTriggerZoom : MonoBehaviour
             .SetEase(Ease.InSine);
 
         lookAtTween = cameraTransform.DOLookAt(player.position,durationIn).SetEase(Ease.InOutSine);
+        //lookAtTween = cameraTransform.
     }
 
     private void OnTriggerExit(Collider other)
