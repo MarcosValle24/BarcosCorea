@@ -58,7 +58,7 @@ public class PlayerInput : MonoBehaviour
         }
 
         Vector2 currentVector = new Vector2(pos.x - centerTouch.x, centerTouch.y);
-        angle = Vector2.SignedAngle(firstTouch, currentVector);
+        angle = -Vector2.SignedAngle(firstTouch, currentVector);
         firstTouch = currentVector;
     }
 
@@ -81,7 +81,7 @@ public class PlayerInput : MonoBehaviour
         }
 
         Vector2 currentVector = new Vector2(pos.x - centerTouch.x, centerTouch.y);
-        angle = Vector2.SignedAngle(firstTouch, currentVector);
+        angle = -Vector2.SignedAngle(firstTouch, currentVector);
         firstTouch = currentVector;
     }
 
