@@ -11041,7 +11041,7 @@ MonoBehaviour:
   uiHandler: {fileID: 498147734}
   dockManager: {fileID: 1191905551}
   fader: {fileID: 760347676}
-  maxTime: 5
+  maxTime: 25
   playerArrived: 0
   fadeOut: {fileID: 878330016}
 --- !u!4 &1191905550
