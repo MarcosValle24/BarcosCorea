@@ -11,6 +11,8 @@ public class TimeGameMode : MonoBehaviour
     [SerializeField] private CanvasGroup fader;
     [SerializeField] private float maxTime;
     [SerializeField] private bool playerArrived;
+
+    [SerializeField] private CanvasGroup fadeOut;
     private float timer = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,12 +32,14 @@ public class TimeGameMode : MonoBehaviour
         playerArrived = true;
         GameManager.instance.SetResult(GameResult.Win);
         playerMovement.Stop();
+        QuitToMainMenu();
 
     }
     void Lose()
     {
         GameManager.instance.SetResult(GameResult.Lose);
         playerMovement.Stop();
+        QuitToMainMenu();
     }
     void Update()
     {
@@ -71,6 +75,7 @@ public class TimeGameMode : MonoBehaviour
         {
             uiHandler.ShowPanel(GameResult.Lose);
             GameManager.instance.SetResult(GameResult.Lose);
+            QuitToMainMenu();
         }
     }
     private void OnPlayerCrashed()
@@ -103,7 +108,8 @@ public class TimeGameMode : MonoBehaviour
     }
     IEnumerator FadeToQuitMainMenu()
     {
-        yield return fader.DOFade(1f, 0f).SetEase(Ease.InOutQuad).WaitForCompletion();
+        yield return new WaitForSeconds(3);
+        yield return fadeOut.DOFade(1,1).WaitForCompletion();
         GameManager.instance.OpenMainMenu();
 
     }

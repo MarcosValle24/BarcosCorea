@@ -24,6 +24,7 @@ public class UIHandlerTimeMode : MonoBehaviour
     {
         panelLose.SetActive(false);
         panelWin.SetActive(false);
+        
         GameManager.instance.Pause(false);
     }
     public void ShowPanel(GameResult result)
@@ -36,9 +37,11 @@ public class UIHandlerTimeMode : MonoBehaviour
         {
             case GameResult.Win:
                 panelWin.SetActive(true);
+                panelWin.GetComponent<Animator>().SetTrigger("win");
                 break;
             case GameResult.Lose:
                 panelLose.SetActive(true);
+                panelWin.GetComponent<Animator>().SetTrigger("lose");
                 break;
         }
     }

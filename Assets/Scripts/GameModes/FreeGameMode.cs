@@ -16,6 +16,7 @@ public class FreeGameMode : MonoBehaviour
     [SerializeField] private CanvasGroup fader;
     [SerializeField] public int fishRecolected;
     [SerializeField] public string playerName;
+    [SerializeField] public Animator fish;
     void Start()
     {
         playerEvents.OnStopped.AddListener(ArrivedWithFish);
@@ -56,6 +57,7 @@ public class FreeGameMode : MonoBehaviour
         Debug.Log("Arrived");
         SpawnFish();
         fishRecolected++;
+        fish.SetTrigger("GetFish");
         uiHandler.ShowFishGameUI(fishRecolected.ToString());
         StopCoroutine(DeactivateDockAfterPlayingFX());
         StartCoroutine(DeactivateDockAfterPlayingFX());
