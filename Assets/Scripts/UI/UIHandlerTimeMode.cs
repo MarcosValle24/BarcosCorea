@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class UIHandlerTimeMode : MonoBehaviour
 {
     [SerializeField] public TMP_Text timerText;
+    [SerializeField] public Slider sliderTime;
     [SerializeField] private GameObject panelWin;
     [SerializeField] private GameObject panelLose;
 
@@ -12,7 +13,10 @@ public class UIHandlerTimeMode : MonoBehaviour
     {
         //RemoveAllPanels();
     }
-
+    public void UpdateSlider(float value)
+    {
+        sliderTime.value = value;
+    }
     public void UpdateTimer(string text)
     {
         if (timerText != null)

@@ -66,13 +66,14 @@ public class TimeGameMode : MonoBehaviour
     private void Clock()
     {
         timer -= Time.deltaTime;
-        int minutes = Mathf.FloorToInt(timer / 60f);
-        int seconds = Mathf.FloorToInt(timer % 60f);
 
-        uiHandler.UpdateTimer(minutes.ToString("00") + ":" + seconds.ToString("00"));
+        uiHandler.sliderTime.value = timer;
 
-        if (timer <= 0)
+        if (timer <= 0f)
         {
+            timer = 0f;
+            uiHandler.sliderTime.value = 0f;
+
             uiHandler.ShowPanel(GameResult.Lose);
             GameManager.instance.SetResult(GameResult.Lose);
             QuitToMainMenu();
@@ -91,6 +92,9 @@ public class TimeGameMode : MonoBehaviour
     IEnumerator FadeIn()
     {
         timer = maxTime;
+        uiHandler.sliderTime.minValue = 0f;
+        uiHandler.sliderTime.maxValue = maxTime;
+        uiHandler.sliderTime.value = maxTime;
         playerArrived = true;
         playerMovement.RestartPosition();
         uiHandler.RemoveAllPanels();
@@ -99,6 +103,10 @@ public class TimeGameMode : MonoBehaviour
         dockManager.DeactivateDocks();
         dockManager.ActivateRandomDock();
         GameManager.instance.SetResult(GameResult.Playing);
+        timer = maxTime;
+        uiHandler.sliderTime.minValue = 0f;
+        uiHandler.sliderTime.maxValue = maxTime;
+        uiHandler.sliderTime.value = maxTime;
     }
 
     IEnumerator FadeOut()
