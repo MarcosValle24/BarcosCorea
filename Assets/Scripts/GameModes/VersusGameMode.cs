@@ -2,12 +2,13 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
-public class TimeGameMode : MonoBehaviour
+public class VersusGameMode : MonoBehaviour
 {
-    [SerializeField] private PlayerEvents playerEvents;
-    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayerEvents playerEvents1;
+    [SerializeField] private PlayerEvents playerEvents2;
+    [SerializeField] private PlayerMovement playerMovement1;
+    [SerializeField] private PlayerMovement playerMovement2;
     [SerializeField] private UIHandlerTimeMode uiHandler;
-    [SerializeField] private DockManager dockManager;
     [SerializeField] private CanvasGroup fader;
     [SerializeField] private float maxTime;
     [SerializeField] private bool playerArrived;
@@ -17,8 +18,8 @@ public class TimeGameMode : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerEvents.OnStopped.AddListener(PlayerArrived);
-        playerEvents.OnCrashed.AddListener(OnPlayerCrashed);
+        playerEvents1.OnCrashed.AddListener(OnPlayerCrashed1);
+        playerEvents2.OnCrashed.AddListener(OnPlayerCrashed2);
         GameManager.instance.OnGameResultChanged.AddListener(OnGameResultChanged);
         ResetValues();
     }
@@ -27,18 +28,12 @@ public class TimeGameMode : MonoBehaviour
         //StopAllCoroutines();
         StartCoroutine(FadeIn());
     }
-    void PlayerArrived()
-    {
-        playerArrived = true;
-        GameManager.instance.SetResult(GameResult.Win);
-        playerMovement.Stop();
-        QuitToMainMenu();
 
-    }
     void Lose()
     {
         GameManager.instance.SetResult(GameResult.Lose);
-        playerMovement.Stop();
+        playerMovement1.Stop();
+        playerMovement2.Stop();
         QuitToMainMenu();
     }
     void Update()
@@ -49,7 +44,7 @@ public class TimeGameMode : MonoBehaviour
         if (playerArrived == true)
             return;
 
-        Clock();    
+        Clock();
     }
     public void QuitToMainMenu()
     {
@@ -74,35 +69,51 @@ public class TimeGameMode : MonoBehaviour
             timer = 0f;
             uiHandler.sliderTime.value = 0f;
 
-            uiHandler.ShowPanel(GameResult.Lose);
-            GameManager.instance.SetResult(GameResult.Lose);
+            uiHandler.ShowPanel(GameResult.Win);
+            GameManager.instance.SetResult(GameResult.Win);
+            playerMovement1.Stop();
+            playerMovement2.Stop();
+            playerArrived = true;
             QuitToMainMenu();
         }
     }
-    private void OnPlayerCrashed()
+    private void OnPlayerCrashed1()
     {
-        StartCoroutine(RecoverFromCrash());
+        StartCoroutine(RecoverFromCrash1());
     }
-    IEnumerator RecoverFromCrash()
+    private void OnPlayerCrashed2()
+    {
+        StartCoroutine(RecoverFromCrash2());
+    }
+    IEnumerator RecoverFromCrash1()
     {
         yield return new WaitForSeconds(.3f);
 
-        playerMovement.RecoverFromCrash();
+        playerMovement1.RecoverFromCrash();
+    }
+    IEnumerator RecoverFromCrash2()
+    {
+        yield return new WaitForSeconds(.3f);
+
+        playerMovement2.RecoverFromCrash();
     }
     IEnumerator FadeIn()
     {
+        playerMovement1.Stop();
+        playerMovement2.Stop();
         timer = maxTime;
         uiHandler.sliderTime.minValue = 0f;
         uiHandler.sliderTime.maxValue = maxTime;
         uiHandler.sliderTime.value = maxTime;
         playerArrived = true;
-        playerMovement.RestartPosition();
+        playerMovement1.RestartPosition();
+        playerMovement2.RestartPosition();
         uiHandler.RemoveAllPanels();
         yield return fader.DOFade(0f, 1f).SetEase(Ease.InOutQuad).WaitForCompletion();
+        yield return new WaitForSeconds(2f);
+        playerMovement1.canMove();
+        playerMovement2.canMove();
         playerArrived = false;
-       //dockManager.DeactivateDocks();
-        dockManager.ActivateRandomDock();
-        playerMovement.canMove();
         GameManager.instance.SetResult(GameResult.Playing);
         timer = maxTime;
         uiHandler.sliderTime.minValue = 0f;
@@ -118,7 +129,7 @@ public class TimeGameMode : MonoBehaviour
     IEnumerator FadeToQuitMainMenu()
     {
         yield return new WaitForSeconds(3);
-        yield return fadeOut.DOFade(1,1).WaitForCompletion();
+        yield return fadeOut.DOFade(1, 1).WaitForCompletion();
         GameManager.instance.OpenMainMenu();
 
     }

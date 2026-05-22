@@ -40,11 +40,18 @@ public class MainMenu : MonoBehaviour
             //yield return new WaitForSeconds(2f);
             GameManager.instance.OpenTimeGameMode();
         }
-        else
+        else if (GameManager.instance.gameMode == Mode.FreeTime)
         {
             //transitionAnimator.SetTrigger("Fade");
             //yield return new WaitForSeconds(2f);
             GameManager.instance.OpenFreeGameMode();
+            
+        }
+        else if (GameManager.instance.gameMode == Mode.VersusMode)
+        {
+            //transitionAnimator.SetTrigger("Fade");
+            //yield return new WaitForSeconds(2f);
+            GameManager.instance.OpenVersusGameMode();
             
         }
         faderPanel.blocksRaycasts = true;

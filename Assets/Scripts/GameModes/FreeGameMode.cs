@@ -93,6 +93,7 @@ public class FreeGameMode : MonoBehaviour
         dockManager.DeactivateDocks();
         SpawnFish();
         yield return fader.DOFade(0f, 1f).SetEase(Ease.InOutQuad).WaitForCompletion();
+        playerMovement.canMove();
         GameManager.instance.gameResult = GameResult.Playing;
     }
     IEnumerator FadeOut()
