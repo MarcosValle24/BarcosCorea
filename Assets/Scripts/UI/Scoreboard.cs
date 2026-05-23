@@ -115,7 +115,7 @@ public class Scoreboard : MonoBehaviour
     
     void ShowScoreBoard()
     {
-        QuitToMainMenu();
+        
         scoreBoardText.text = "";
         for (int i = 0; i < scoreboard.scores.Count; i++)
         {

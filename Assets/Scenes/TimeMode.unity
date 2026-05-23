@@ -8703,7 +8703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!225 &760347676
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -11071,8 +11071,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DockManager
   docks:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1883478791}
+  - {fileID: 926951599}
 --- !u!1001 &1219400347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11552,10 +11552,10 @@ RectTransform:
   m_Father: {fileID: 234697309}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 0}
-  m_SizeDelta: {x: 0, y: 109.0403}
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 43.10797, y: -50.00006}
+  m_SizeDelta: {x: 629.7842, y: 101.1225}
+  m_Pivot: {x: 0, y: 1}
 --- !u!1 &1252926527
 GameObject:
   m_ObjectHideFlags: 0
