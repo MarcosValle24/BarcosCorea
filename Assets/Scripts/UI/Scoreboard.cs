@@ -107,7 +107,7 @@ public class Scoreboard : MonoBehaviour
     
     IEnumerator FadeToQuitMainMenu()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         yield return fadeOut.DOFade(1,1).WaitForCompletion();
         GameManager.instance.OpenMainMenu();
 
