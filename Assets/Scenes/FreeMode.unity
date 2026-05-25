@@ -6548,7 +6548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &334346772
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14145,6 +14145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIHandlerFreeMode
   panelEnterScore: {fileID: 131358278}
+  freeFish: {fileID: 334346771}
   panelShowScore: {fileID: 1238851359}
   fishTextEnterScore: {fileID: 997882528}
   fishTextEnterScore2: {fileID: 1953048264}
