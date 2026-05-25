@@ -2679,9 +2679,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Desarrollado en SAE Institute M\xE9xico por:\r\n\r\nEsteban Hern\xE1ndez
-    Valenzuela\r\nDarell Didier Rodr\xEDguez Ramos\r\n\r\nCoordinadores de proyecto:\r\n\nAlejandro
-    Almazan\r\nCuauhtemoc Senties\r\nLuis Javier\nMarcos Valle\r\n\r\n\r\nY Agradecemos
-    al Museo\n\nnombre\nnombre\nnombre\nnombre \r\nnombre\nnombre\nnombre\nnombre\nnombre"
+    Valenzuela\r\nDarell Didier Rodr\xEDguez Ramos\r\nJoaqu\xEDn Maldonado Valente\n\r\nCoordinadores
+    de proyecto:\r\n\nAlejandro Almazan\r\nCuauhtemoc Senties\r\nLuis Javier\nMarcos
+    Valle\r\n\r\n\r\nY Agradecemos al Museo\n\nnombre\nnombre\nnombre\nnombre \r\nnombre\nnombre\nnombre\nnombre\nnombre"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ea5bbbca67e27249a946503623bbbd8, type: 2}
   m_sharedMaterial: {fileID: 4509446598593626004, guid: 9ea5bbbca67e27249a946503623bbbd8, type: 2}
