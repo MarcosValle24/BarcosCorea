@@ -88,7 +88,7 @@ public class FreeGameMode : MonoBehaviour
         SetValues();
         uiHandler.ShowFishRecolected(fishRecolected.ToString());
         playerMovement.RestartPosition();
-        dockManager.DeactivateDocks();
+        //dockManager.DeactivateDocks();
         uiHandler.RemoveAllPanels();
         dockManager.DeactivateDocks();
         SpawnFish();
