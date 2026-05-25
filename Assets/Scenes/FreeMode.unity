@@ -6331,7 +6331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2076741d19c06b24782da31dabc6cb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DcokScript
-  arrow: {fileID: 0}
+  arrow: {fileID: 1147436650}
 --- !u!54 &286699020
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7361,7 +7361,7 @@ Transform:
   m_GameObject: {fileID: 504838979}
   serializedVersion: 2
   m_LocalRotation: {x: 0.11674657, y: 0.47941738, z: -0.0645273, w: 0.86739}
-  m_LocalPosition: {x: -2.3253937, y: 1.3600001, z: -6.2674327}
+  m_LocalPosition: {x: 0.09, y: 1.36, z: 0.13}
   m_LocalScale: {x: 0.09047524, y: 0.113131166, z: 0.09838506}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8183,7 +8183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2076741d19c06b24782da31dabc6cb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DockScript
-  arrow: {fileID: 0}
+  arrow: {fileID: 504838979}
 --- !u!54 &653980511
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10399,7 +10399,7 @@ Transform:
   m_GameObject: {fileID: 1147436650}
   serializedVersion: 2
   m_LocalRotation: {x: 0.13339242, y: -0, z: -0, w: 0.99106336}
-  m_LocalPosition: {x: 0.089999996, y: 1.3600001, z: 0}
+  m_LocalPosition: {x: 0, y: 0.99, z: 0.18}
   m_LocalScale: {x: 0.053603888, y: 0.123904884, z: 0.18682732}
   m_ConstrainProportionsScale: 0
   m_Children: []
