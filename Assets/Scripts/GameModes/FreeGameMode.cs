@@ -65,7 +65,9 @@ public class FreeGameMode : MonoBehaviour
     void Lose()
     {
         RemoveFishes();
+        playerMovement.Stop();
         StartCoroutine(WaitAfterCrash());
+        
     }
     void RecolectedFish()
     {
