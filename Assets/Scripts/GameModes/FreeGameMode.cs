@@ -65,7 +65,9 @@ public class FreeGameMode : MonoBehaviour
     void Lose()
     {
         RemoveFishes();
+        playerMovement.Stop();
         StartCoroutine(WaitAfterCrash());
+        
     }
     void RecolectedFish()
     {
@@ -88,7 +90,7 @@ public class FreeGameMode : MonoBehaviour
         SetValues();
         uiHandler.ShowFishRecolected(fishRecolected.ToString());
         playerMovement.RestartPosition();
-        dockManager.DeactivateDocks();
+        //dockManager.DeactivateDocks();
         uiHandler.RemoveAllPanels();
         dockManager.DeactivateDocks();
         SpawnFish();
