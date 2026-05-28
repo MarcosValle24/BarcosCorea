@@ -24,6 +24,7 @@ public class PlayerMovementVersus : MonoBehaviour
     private bool hasFish;
     public bool HasFish { get { return hasFish; } }
 
+    public int fishes;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();

@@ -4,9 +4,12 @@ using UnityEngine.UI;
 
 public class UIHandlerVersusMode : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI player1Fishes; 
+    [SerializeField] private TextMeshProUGUI player2Fishes; 
     [SerializeField] public Slider sliderTime;
-    [SerializeField] private GameObject panelWin;
-    [SerializeField] private GameObject panelLose;
+    [SerializeField] private GameObject panelWinPlayer1;
+    [SerializeField] private GameObject panelWinPlayer2;
+    [SerializeField] private GameObject panelEmpate;
 
     private void Start()
     {
@@ -16,28 +19,31 @@ public class UIHandlerVersusMode : MonoBehaviour
     {
         sliderTime.value = value;
     }
+    public void UpdateFishes(int player1,int player2)
+    {
+        player1Fishes.text = player1.ToString();
+        player2Fishes.text = player2.ToString();
+    }
     public void RemoveAllPanels()
     {
-        panelLose.SetActive(false);
-        panelWin.SetActive(false);
+        panelWinPlayer1.SetActive(false);
+        panelWinPlayer2.SetActive(false);
         
         GameManager.instance.Pause(false);
     }
     public void ShowPanel(GameResult result)
     {
-        panelLose.SetActive(false);
+        panelWinPlayer1.SetActive(false);
 
-        panelWin.SetActive(false);
+        panelWinPlayer2.SetActive(false);
 
         switch (result)
         {
             case GameResult.Win:
-                panelWin.SetActive(true);
-                panelWin.GetComponent<Animator>().SetTrigger("win");
+                panelWinPlayer1.SetActive(true);
                 break;
             case GameResult.Lose:
-                panelLose.SetActive(true);
-                panelWin.GetComponent<Animator>().SetTrigger("lose");
+                panelWinPlayer2.SetActive(true);
                 break;
         }
     }

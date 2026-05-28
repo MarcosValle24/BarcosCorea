@@ -10,6 +10,9 @@ public enum GameResult
     Win,
     Lose,
     Playing,
+    WinPlayer1,
+    WinPlayer2,
+    Empate,
 }
 public enum Mode
 {

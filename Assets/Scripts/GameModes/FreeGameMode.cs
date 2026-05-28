@@ -24,7 +24,7 @@ public class FreeGameMode : MonoBehaviour
         playerEvents.OnFishRecolected.AddListener(RecolectedFish);
         scoreboard.OnEnterScore.AddListener(uiHandler.ShowScorePanel);
         uiHandler.ShowFishGameUI(fishRecolected.ToString());
-        SpawnFish();
+        //SpawnFish();
         OnGameStart();
     }
     void OnGameStart()

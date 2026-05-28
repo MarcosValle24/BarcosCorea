@@ -10,6 +10,7 @@ public class VersusGameMode : MonoBehaviour
     [SerializeField] private PlayerMovementVersus playerMovement1;
     [SerializeField] private PlayerMovementVersus playerMovement2;
     [SerializeField] private UIHandlerVersusMode uiHandler;
+    [SerializeField] private FishManager fishSpawneer;
     [SerializeField] private CanvasGroup fader;
     [SerializeField] private float maxTime;
     [SerializeField] private bool playerArrived;
@@ -33,16 +34,18 @@ public class VersusGameMode : MonoBehaviour
     private void RecolectedFishPlayer1()
     {
         fishesPlayer1++;
+        fishSpawneer.SpawnFish();
         UpdateUI();
     }
     private void RecolectedFishPlayer2()
     {
         fishesPlayer2++;
+        fishSpawneer.SpawnFish();
         UpdateUI();
     }
     private void UpdateUI()
     {
-        //uiHandler
+        uiHandler.UpdateFishes(fishesPlayer1,fishesPlayer2);
     }
     void ResetValues()
     {
@@ -57,6 +60,8 @@ public class VersusGameMode : MonoBehaviour
         playerMovement2.Stop();
         QuitToMainMenu();
     }
+    public float timerspawneer;
+    public float nextSpawnTime;
     void Update()
     {
         if (GameManager.instance.gameResult != GameResult.Playing)
@@ -65,9 +70,22 @@ public class VersusGameMode : MonoBehaviour
         if (playerArrived == true)
             return;
 
+        timerspawneer += Time.deltaTime;
+
+        if (timerspawneer >= nextSpawnTime)
+        {
+            fishSpawneer.SpawnFish();
+            SetNextSpawn();
+        }
         Clock();
     }
-    public void QuitToMainMenu()
+
+void SetNextSpawn()
+{
+    timerspawneer = 0f;
+    nextSpawnTime = UnityEngine.Random.Range(2f, 3f);
+}
+public void QuitToMainMenu()
     {
         StartCoroutine(FadeToQuitMainMenu());
     }
@@ -90,8 +108,24 @@ public class VersusGameMode : MonoBehaviour
             timer = 0f;
             uiHandler.sliderTime.value = 0f;
 
-            uiHandler.ShowPanel(GameResult.Win);
-            GameManager.instance.SetResult(GameResult.Win);
+            if(fishesPlayer1 > fishesPlayer2)
+            {
+               // uiHandler.ShowPanel(GameResult.WinPlayer1);
+                GameManager.instance.SetResult(GameResult.WinPlayer1);
+
+            }
+            else if(fishesPlayer2> fishesPlayer1)
+            {
+                //uiHandler.ShowPanel(GameResult.WinPlayer2);
+                GameManager.instance.SetResult(GameResult.WinPlayer2);
+
+            }
+            else
+            {
+                //uiHandler.ShowPanel(GameResult.Empate);
+                GameManager.instance.SetResult(GameResult.Empate);
+
+            }
             playerMovement1.Stop();
             playerMovement2.Stop();
             playerArrived = true;
@@ -122,6 +156,7 @@ public class VersusGameMode : MonoBehaviour
     }
     IEnumerator FadeIn()
     {
+        fishSpawneer.SpawnFish();
         playerMovement1.Stop();
         playerMovement2.Stop();
         timer = maxTime;
