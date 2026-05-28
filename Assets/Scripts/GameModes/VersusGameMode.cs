@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,22 +7,42 @@ public class VersusGameMode : MonoBehaviour
 {
     [SerializeField] private PlayerEvents playerEvents1;
     [SerializeField] private PlayerEvents playerEvents2;
-    [SerializeField] private PlayerMovement playerMovement1;
-    [SerializeField] private PlayerMovement playerMovement2;
-    [SerializeField] private UIHandlerTimeMode uiHandler;
+    [SerializeField] private PlayerMovementVersus playerMovement1;
+    [SerializeField] private PlayerMovementVersus playerMovement2;
+    [SerializeField] private UIHandlerVersusMode uiHandler;
     [SerializeField] private CanvasGroup fader;
     [SerializeField] private float maxTime;
     [SerializeField] private bool playerArrived;
 
     [SerializeField] private CanvasGroup fadeOut;
     private float timer = 0;
+
+    private int fishesPlayer1;
+    private int fishesPlayer2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerEvents1.OnCrashed.AddListener(OnPlayerCrashed1);
         playerEvents2.OnCrashed.AddListener(OnPlayerCrashed2);
+        playerEvents1.OnFishRecolected.AddListener(RecolectedFishPlayer1);
+        playerEvents2.OnFishRecolected.AddListener(RecolectedFishPlayer2);
         GameManager.instance.OnGameResultChanged.AddListener(OnGameResultChanged);
         ResetValues();
+    }
+
+    private void RecolectedFishPlayer1()
+    {
+        fishesPlayer1++;
+        UpdateUI();
+    }
+    private void RecolectedFishPlayer2()
+    {
+        fishesPlayer2++;
+        UpdateUI();
+    }
+    private void UpdateUI()
+    {
+        //uiHandler
     }
     void ResetValues()
     {
@@ -87,13 +108,15 @@ public class VersusGameMode : MonoBehaviour
     }
     IEnumerator RecoverFromCrash1()
     {
-        yield return new WaitForSeconds(.3f);
+        playerMovement1.Stop();
+        yield return new WaitForSeconds(.5f);
 
         playerMovement1.RecoverFromCrash();
     }
     IEnumerator RecoverFromCrash2()
     {
-        yield return new WaitForSeconds(.3f);
+        playerMovement2.Stop();
+        yield return new WaitForSeconds(.5f);
 
         playerMovement2.RecoverFromCrash();
     }

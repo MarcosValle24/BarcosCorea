@@ -17,7 +17,14 @@ public class FishRecolected : MonoBehaviour
                 Recolected();
                 Debug.Log("Choco con pex");
             }
+            PlayerMovementVersus playerVersus = other.GetComponent<PlayerMovementVersus>();
+            if (playerRef != null)
+            {
+                playerRef.RecolectFish();
+                Recolected();
                 Debug.Log("Choco con pex");
+            }
+               
 
         }
     }

@@ -32,25 +32,36 @@ public class MainMenu : MonoBehaviour
     }
     IEnumerator OpenGameMode()
     {
-        yield return faderPanel.DOFade(0f, fadeDuration).SetEase(Ease.InOutQuad).WaitForCompletion();
-
+        //Tutoriales
+        yield return new WaitForSeconds(5f);
         if (GameManager.instance.gameMode == Mode.TimeMode)
         {
-            //transitionAnimator.SetTrigger("Fade");
-            //yield return new WaitForSeconds(2f);
+
+        }
+        else if (GameManager.instance.gameMode == Mode.FreeTime)
+        {
+
+
+        }
+        else if (GameManager.instance.gameMode == Mode.VersusMode)
+        {
+
+
+        }
+        yield return faderPanel.DOFade(0f, fadeDuration).SetEase(Ease.InOutQuad).WaitForCompletion();
+        //Escena
+        if (GameManager.instance.gameMode == Mode.TimeMode)
+        {
             GameManager.instance.OpenTimeGameMode();
         }
         else if (GameManager.instance.gameMode == Mode.FreeTime)
         {
-            //transitionAnimator.SetTrigger("Fade");
-            //yield return new WaitForSeconds(2f);
+
             GameManager.instance.OpenFreeGameMode();
             
         }
         else if (GameManager.instance.gameMode == Mode.VersusMode)
         {
-            //transitionAnimator.SetTrigger("Fade");
-            //yield return new WaitForSeconds(2f);
             GameManager.instance.OpenVersusGameMode();
             
         }
