@@ -10,9 +10,14 @@ public class MainMenu : MonoBehaviour
    // [SerializeField] private Animator transitionAnimator;
     [SerializeField] private CanvasGroup faderPanel;
     [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private GameObject freeTutorial;
+    [SerializeField] private GameObject timeTutorial;
+    [SerializeField] private GameObject timonTutorial;
 
     private void Start()
     {
+        freeTutorial.SetActive(false);
+        timeTutorial.SetActive(false);
         FadeIn();
     }
     public void ChangeScene()
@@ -32,15 +37,17 @@ public class MainMenu : MonoBehaviour
     }
     IEnumerator OpenGameMode()
     {
+        timonTutorial.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        timonTutorial.SetActive(false);
         //Tutoriales
-        yield return new WaitForSeconds(5f);
         if (GameManager.instance.gameMode == Mode.TimeMode)
         {
-
+            timeTutorial.SetActive(true);
         }
         else if (GameManager.instance.gameMode == Mode.FreeTime)
         {
-
+            freeTutorial.SetActive(true);
 
         }
         else if (GameManager.instance.gameMode == Mode.VersusMode)
@@ -48,6 +55,7 @@ public class MainMenu : MonoBehaviour
 
 
         }
+        yield return new WaitForSeconds(5f);
         yield return faderPanel.DOFade(0f, fadeDuration).SetEase(Ease.InOutQuad).WaitForCompletion();
         //Escena
         if (GameManager.instance.gameMode == Mode.TimeMode)

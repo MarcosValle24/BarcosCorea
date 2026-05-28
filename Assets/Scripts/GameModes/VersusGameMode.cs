@@ -95,7 +95,7 @@ public class VersusGameMode : MonoBehaviour
             playerMovement1.Stop();
             playerMovement2.Stop();
             playerArrived = true;
-            QuitToMainMenu();
+            //QuitToMainMenu();
         }
     }
     private void OnPlayerCrashed1()

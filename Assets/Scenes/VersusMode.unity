@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 127287046}
   - component: {fileID: 127287049}
   - component: {fileID: 127287048}
-  - component: {fileID: 127287047}
+  - component: {fileID: 127287050}
   m_Layer: 5
   m_Name: player1Timon
   m_TagString: Untagged
@@ -583,19 +583,6 @@ RectTransform:
   m_AnchoredPosition: {x: -521.79626, y: -72.48419}
   m_SizeDelta: {x: 573.284, y: 558.9241}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &127287047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 127287045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1936039ef96b8544fb25b4d89d08d34c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  playerAngleMovement: {fileID: 0}
 --- !u!114 &127287048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,6 +621,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 127287045}
   m_CullTransparentMesh: 1
+--- !u!114 &127287050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127287045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7850ce7ce2a709c40b3654f863649708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimonMovementVersus
+  playerAngleMovement: {fileID: 2102774106}
 --- !u!1 &141148830
 GameObject:
   m_ObjectHideFlags: 0
@@ -3791,6 +3791,76 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &870372209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 870372212}
+  - component: {fileID: 870372211}
+  - component: {fileID: 870372210}
+  m_Layer: 0
+  m_Name: ---FishSpaweer---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &870372210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870372209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ae7e6926f026d04aa13284d935a9c76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishManager
+  FishPrefab: {fileID: 3860792600617623905, guid: 2df24e506a0bab645938134a8fa4108b, type: 3}
+  FishRef: {fileID: 0}
+  fishToSpawn: 1
+  fishes: []
+--- !u!65 &870372211
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870372209}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &870372212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870372209}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5, y: 0, z: 1.88}
+  m_LocalScale: {x: 25.699787, y: 1, z: 21.197926}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &878330014
 GameObject:
   m_ObjectHideFlags: 0
@@ -6839,7 +6909,7 @@ GameObject:
   - component: {fileID: 1472464035}
   - component: {fileID: 1472464038}
   - component: {fileID: 1472464037}
-  - component: {fileID: 1472464036}
+  - component: {fileID: 1472464039}
   m_Layer: 5
   m_Name: player2Timon
   m_TagString: Untagged
@@ -6866,19 +6936,6 @@ RectTransform:
   m_AnchoredPosition: {x: 521.79614, y: -72.48419}
   m_SizeDelta: {x: 573.284, y: 558.9241}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1472464036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472464034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1936039ef96b8544fb25b4d89d08d34c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  playerAngleMovement: {fileID: 0}
 --- !u!114 &1472464037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6917,6 +6974,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472464034}
   m_CullTransparentMesh: 1
+--- !u!114 &1472464039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472464034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7850ce7ce2a709c40b3654f863649708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimonMovementVersus
+  playerAngleMovement: {fileID: 1449788484}
 --- !u!1 &1477059376
 GameObject:
   m_ObjectHideFlags: 0
@@ -11163,3 +11233,4 @@ SceneRoots:
   - {fileID: 892007188}
   - {fileID: 779755465}
   - {fileID: 1107001590}
+  - {fileID: 870372212}
