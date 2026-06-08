@@ -39,12 +39,16 @@ public class UIHandlerVersusMode : MonoBehaviour
 
         switch (result)
         {
-            case GameResult.Win:
+            case GameResult.WinPlayer1:
                 panelWinPlayer1.SetActive(true);
                 break;
-            case GameResult.Lose:
+            case GameResult.WinPlayer2:
                 panelWinPlayer2.SetActive(true);
                 break;
+            case GameResult.Empate: 
+                panelEmpate.SetActive(true);
+                break;
+            default: break;
         }
     }
 

@@ -18,9 +18,9 @@ public class FishRecolected : MonoBehaviour
                 Debug.Log("Choco con pex");
             }
             PlayerMovementVersus playerVersus = other.GetComponent<PlayerMovementVersus>();
-            if (playerRef != null)
+            if (playerVersus != null)
             {
-                playerRef.RecolectFish();
+                playerVersus.RecolectFish();
                 Recolected();
                 Debug.Log("Choco con pex");
             }

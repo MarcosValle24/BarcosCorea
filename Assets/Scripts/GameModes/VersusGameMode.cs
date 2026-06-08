@@ -72,7 +72,7 @@ public class VersusGameMode : MonoBehaviour
 
         timerspawneer += Time.deltaTime;
 
-        if (timerspawneer >= nextSpawnTime)
+        if (timerspawneer >= nextSpawnTime && uiHandler.sliderTime.value != 0)
         {
             fishSpawneer.SpawnFish();
             SetNextSpawn();
@@ -110,7 +110,7 @@ public void QuitToMainMenu()
 
             if(fishesPlayer1 > fishesPlayer2)
             {
-               // uiHandler.ShowPanel(GameResult.WinPlayer1);
+                //uiHandler.ShowPanel(GameResult.WinPlayer1);
                 GameManager.instance.SetResult(GameResult.WinPlayer1);
 
             }
@@ -122,14 +122,13 @@ public void QuitToMainMenu()
             }
             else
             {
-                //uiHandler.ShowPanel(GameResult.Empate);
+                uiHandler.ShowPanel(GameResult.Empate);
                 GameManager.instance.SetResult(GameResult.Empate);
-
             }
             playerMovement1.Stop();
             playerMovement2.Stop();
             playerArrived = true;
-            //QuitToMainMenu();
+            QuitToMainMenu();
         }
     }
     private void OnPlayerCrashed1()
