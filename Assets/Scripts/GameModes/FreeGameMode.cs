@@ -24,7 +24,7 @@ public class FreeGameMode : MonoBehaviour
         playerEvents.OnFishRecolected.AddListener(RecolectedFish);
         scoreboard.OnEnterScore.AddListener(uiHandler.ShowScorePanel);
         uiHandler.ShowFishGameUI(fishRecolected.ToString());
-        SpawnFish();
+        //SpawnFish();
         OnGameStart();
     }
     void OnGameStart()
@@ -65,7 +65,9 @@ public class FreeGameMode : MonoBehaviour
     void Lose()
     {
         RemoveFishes();
+        playerMovement.Stop();
         StartCoroutine(WaitAfterCrash());
+        
     }
     void RecolectedFish()
     {
@@ -88,11 +90,12 @@ public class FreeGameMode : MonoBehaviour
         SetValues();
         uiHandler.ShowFishRecolected(fishRecolected.ToString());
         playerMovement.RestartPosition();
-        dockManager.DeactivateDocks();
+        //dockManager.DeactivateDocks();
         uiHandler.RemoveAllPanels();
         dockManager.DeactivateDocks();
         SpawnFish();
         yield return fader.DOFade(0f, 1f).SetEase(Ease.InOutQuad).WaitForCompletion();
+        playerMovement.canMove();
         GameManager.instance.gameResult = GameResult.Playing;
     }
     IEnumerator FadeOut()

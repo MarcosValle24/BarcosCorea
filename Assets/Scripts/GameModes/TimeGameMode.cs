@@ -100,8 +100,9 @@ public class TimeGameMode : MonoBehaviour
         uiHandler.RemoveAllPanels();
         yield return fader.DOFade(0f, 1f).SetEase(Ease.InOutQuad).WaitForCompletion();
         playerArrived = false;
-        dockManager.DeactivateDocks();
+       //dockManager.DeactivateDocks();
         dockManager.ActivateRandomDock();
+        playerMovement.canMove();
         GameManager.instance.SetResult(GameResult.Playing);
         timer = maxTime;
         uiHandler.sliderTime.minValue = 0f;
