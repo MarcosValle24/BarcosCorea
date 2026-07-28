@@ -13,11 +13,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject freeTutorial;
     [SerializeField] private GameObject timeTutorial;
     [SerializeField] private GameObject timonTutorial;
+    [SerializeField] private GameObject versusTutorial;
 
     private void Start()
     {
         freeTutorial.SetActive(false);
         timeTutorial.SetActive(false);
+        versusTutorial.SetActive(false);
         FadeIn();
     }
     public void ChangeScene()
@@ -52,9 +54,9 @@ public class MainMenu : MonoBehaviour
         }
         else if (GameManager.instance.gameMode == Mode.VersusMode)
         {
-
-
+            versusTutorial.SetActive(true);
         }
+
         yield return new WaitForSeconds(5f);
         yield return faderPanel.DOFade(0f, fadeDuration).SetEase(Ease.InOutQuad).WaitForCompletion();
         //Escena
