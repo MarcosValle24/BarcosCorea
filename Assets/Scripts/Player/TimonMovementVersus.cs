@@ -9,6 +9,7 @@ public class TimonMovementVersus : MonoBehaviour
     {
         MoveTimon();
     }
+    float playerRotationSpeed = .3f;
     public void MoveTimon()
     {
         if (playerAngleMovement == null || !playerAngleMovement.isActiveAndEnabled) return;
@@ -16,9 +17,8 @@ public class TimonMovementVersus : MonoBehaviour
         if (playerAngleMovement.GetIsPressed == true)
         {
             float angle = playerAngleMovement.GetAngle;
-            float playerRotationSpeed = playerAngleMovement.GetRotationSpeed;
             //transform.localRotation = Quaternion.Euler(0, 0, -targetAngle);
-            transform.Rotate(Vector3.forward * -playerAngleMovement.GetAngle * playerAngleMovement.GetRotationSpeed);
+            transform.Rotate(Vector3.forward * -playerAngleMovement.GetAngle * playerRotationSpeed);
         }
     }
 }

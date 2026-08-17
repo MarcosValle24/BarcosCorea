@@ -62,6 +62,7 @@ public class PlayerMovementVersus : MonoBehaviour
                 break;
             case PlayerStateType.Paused:
                 Paused();
+                canMove();
                 break;
             case PlayerStateType.Rotating:
                 Rotate();
@@ -70,6 +71,7 @@ public class PlayerMovementVersus : MonoBehaviour
                 StopBoat();
                 break;
             case PlayerStateType.Crashed:
+                Stop();
                 break;
             default:
                 break;
