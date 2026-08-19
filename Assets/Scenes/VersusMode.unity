@@ -3623,8 +3623,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.81460667}
-  m_Center: {x: 0, y: 0, z: -0.037084028}
+  m_Size: {x: 1, y: 1, z: 0.7683315}
+  m_Center: {x: 0, y: 0, z: -0.060221717}
 --- !u!4 &870372212
 Transform:
   m_ObjectHideFlags: 0
@@ -4383,11 +4383,11 @@ PrefabInstance:
       objectReference: {fileID: 1758420558}
     - target: {fileID: 3307251338438281924, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
       propertyPath: m_Duration
-      value: 57.900627
+      value: 50.663044
       objectReference: {fileID: 0}
     - target: {fileID: 3307251338438281924, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
       propertyPath: m_MaxSpeed
-      value: 2.1
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 3307251338438281924, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
       propertyPath: m_EasingMode
@@ -4856,11 +4856,11 @@ PrefabInstance:
       objectReference: {fileID: 1816450511}
     - target: {fileID: 3307251338438281924, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
       propertyPath: m_Duration
-      value: 80.99349
+      value: 60.745117
       objectReference: {fileID: 0}
     - target: {fileID: 3307251338438281924, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
       propertyPath: m_MaxSpeed
-      value: 1.8
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 3307251338438281924, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
       propertyPath: m_EasingMode
@@ -6972,10 +6972,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b068a3400a96e14680c24c42da36026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementVersus
-  speed: 1.5
+  speed: 2
   initialSpeed: 0
   stopSpeed: 0.8
-  rotationSpeed: 0.6
+  rotationSpeed: 0.4
   playerInput: {fileID: 1449788484}
   playerState: {fileID: 1449788479}
   playerEvents: {fileID: 1449788475}
@@ -6993,7 +6993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputVersus
   playerIndex: 1
-  rotationSpeed: 0.8
+  rotationSpeed: 0.4
 --- !u!1 &1452071913
 GameObject:
   m_ObjectHideFlags: 0
@@ -8331,11 +8331,11 @@ PrefabInstance:
       objectReference: {fileID: 1019514798}
     - target: {fileID: 3307251338438281924, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
       propertyPath: m_Duration
-      value: 42.715572
+      value: 35.59631
       objectReference: {fileID: 0}
     - target: {fileID: 3307251338438281924, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
       propertyPath: m_MaxSpeed
-      value: 2
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 3307251338438281924, guid: 65e390728cf9d134ea6286b3473d5b96, type: 3}
       propertyPath: m_EasingMode
@@ -11481,7 +11481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputVersus
   playerIndex: 0
-  rotationSpeed: 0.8
+  rotationSpeed: 0.4
 --- !u!114 &2102774107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11494,10 +11494,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b068a3400a96e14680c24c42da36026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementVersus
-  speed: 1.5
+  speed: 2
   initialSpeed: 0
   stopSpeed: 0.8
-  rotationSpeed: 0.6
+  rotationSpeed: 0.4
   playerInput: {fileID: 2102774106}
   playerState: {fileID: 2102774109}
   playerEvents: {fileID: 2102774105}
