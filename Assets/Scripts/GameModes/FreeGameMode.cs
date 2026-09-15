@@ -66,6 +66,7 @@ public class FreeGameMode : MonoBehaviour
     {
         RemoveFishes();
         playerMovement.Stop();
+        PlayerMovement.FindFirstObjectByType<PlayerMovement>().enabled = false;
         StartCoroutine(WaitAfterCrash());
         
     }

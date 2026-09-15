@@ -32,6 +32,7 @@ public class TimeGameMode : MonoBehaviour
         playerArrived = true;
         GameManager.instance.SetResult(GameResult.Win);
         playerMovement.Stop();
+        PlayerMovement.FindFirstObjectByType<PlayerMovement>().enabled = false;
         QuitToMainMenu();
 
     }
